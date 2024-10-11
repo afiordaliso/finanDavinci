@@ -65,10 +65,10 @@ export default function Dashboard() {
         my='26px'
         gap='24px'>
         <BuiltByDevelopers
-          title={"Built by Developers"}
-          name={"Purity UI Dashboard"}
+          title={"Finanzas Personales"}
+          name={"finanDavinci"}
           description={
-            "From colors, cards, typography to complex elements, you will find the full documentation."
+            "¡Bienvenido/a! En esta plataforma podrás gestionar tus finanzas personales de manera fácil y eficiente. Con herramientas diseñadas para simplificar la administración de tus ingresos y gastos, podrás tener un mayor control para visualizar tus metas financieras."
           }
           image={
             <Image
@@ -80,9 +80,9 @@ export default function Dashboard() {
         />
         <WorkWithTheRockets
           backgroundImage={peopleImage}
-          title={"Work with the rockets"}
+          title={"Gestioná tus finanzas con nosotros"}
           description={
-            "Wealth creation is a revolutionary recent positive-sum game. It is all about who takes the opportunity first."
+            "La organización y el seguimiento constante te permitirán tomar decisiones más informadas, mejorar tu estabilidad económica y crear hábitos financieros saludables para un futuro más próspero."
           }
         />
       </Grid>
