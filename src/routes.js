@@ -20,7 +20,7 @@ import {
 var dashRoutes = [
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "Inicio",
     rtlName: "لوحة القيادة",
     icon: <HomeIcon color="inherit" />,
     component: Dashboard,
@@ -67,7 +67,7 @@ var dashRoutes = [
       },
       {
         path: "/signin",
-        name: "Sign In",
+        name: "Inicio de Sesión",
         rtlName: "لوحة القيادة",
         icon: <DocumentIcon color="inherit" />,
         component: SignIn,
@@ -75,7 +75,7 @@ var dashRoutes = [
       },
       {
         path: "/signup",
-        name: "Sign Up",
+        name: "Registrarse",
         rtlName: "لوحة القيادة",
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,
