@@ -113,7 +113,7 @@ export default function Dashboard() {
           data={dashboardTableData}
         />
         <OrdersOverview
-          title={"Orders Overview"}
+          title={"Cambio 2"}
           amount={30}
           data={timelineData}
         />
