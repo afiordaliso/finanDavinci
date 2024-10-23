@@ -60,7 +60,7 @@ export default function Dashboard() {
         />
       </SimpleGrid>
       <Grid
-        templateColumns={{ md: "1fr", lg: "10fr 1.2fr" }}
+        templateColumns={{ md: "1fr", lg: "2fr 1.2fr" }}
         templateRows={{ md: "1fr auto", lg: "1fr" }}
         my='26px'
         gap='24px'>
@@ -70,13 +70,6 @@ export default function Dashboard() {
 
           description={
             "¡Bienvenido/a! En esta plataforma podrás gestionar tus finanzas personales de manera fácil y eficiente. Con herramientas diseñadas para simplificar la administración de tus ingresos y gastos, podrás tener un mayor control para visualizar tus metas financieras."
-          }
-          image={
-            <Image
-              src={logoChakra}
-              alt='chakra image'
-              minWidth={{ md: "300px", lg: "auto" }}
-            />
           }
         />
 
@@ -90,23 +83,7 @@ export default function Dashboard() {
 
       </Grid>
       <Grid
-        templateColumns={{ sm: "1fr", lg: "1.3fr 1.7fr" }}
-        templateRows={{ sm: "repeat(2, 1fr)", lg: "1fr" }}
-        gap='24px'
-        mb={{ lg: "26px" }}>
-        <ActiveUsers
-          title={"Active Users"}
-          percentage={23}
-          chart={<BarChart />}
-        />
-        <SalesOverview
-          title={"Sales Overview"}
-          percentage={5}
-          chart={<LineChart />}
-        />
-      </Grid>
-      <Grid
-        templateColumns={{ sm: "1fr", md: "1fr 1fr", lg: "2fr 1fr" }}
+        templateColumns={{ sm: "1fr", md: "1fr 1fr", lg: "1fr" }}
         templateRows={{ sm: "1fr auto", md: "1fr", lg: "1fr" }}
         gap='24px'>
         <Projects
@@ -114,11 +91,6 @@ export default function Dashboard() {
           amount={30}
           captions={["Companies", "Members", "Budget", "Completion"]}
           data={dashboardTableData}
-        />
-        <OrdersOverview
-          title={"Cambio 2"}
-          amount={30}
-          data={timelineData}
         />
       </Grid>
     </Flex>
