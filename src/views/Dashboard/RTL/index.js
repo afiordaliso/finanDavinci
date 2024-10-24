@@ -20,12 +20,12 @@ import {
 } from "components/Icons/Icons.js";
 import React from "react";
 import { rtlDashboardTableData, rtlTimelineData } from "variables/general";
-import ActiveUsers from "../Dashboard/components/ActiveUsers";
+import ActiveUsers from "../Dashboard/components/Estadisticas";
 import BuiltByDevelopers from "../Dashboard/components/BuiltByDevelopers";
 import MiniStatistics from "../Dashboard/components/MiniStatistics";
 import OrdersOverview from "../Dashboard/components/OrdersOverview";
 import Projects from "../Dashboard/components/Projects";
-import SalesOverview from "../Dashboard/components/SalesOverview";
+import SalesOverview from "../Dashboard/components/TransactionForm";
 import WorkWithTheRockets from "../Dashboard/components/WorkWithTheRockets";
 
 export default function Dashboard() {
