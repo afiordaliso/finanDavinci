@@ -25,8 +25,11 @@ import BuiltByDevelopers from "./components/BuiltByDevelopers";
 import MiniStatistics from "./components/MiniStatistics";
 import OrdersOverview from "./components/OrdersOverview";
 import Projects from "./components/Projects";
-import TransactionForm from "./components/TransactionForm";
 import WorkWithTheRockets from "./components/WorkWithTheRockets";
+
+import TransactionForm from "./components/TransactionForm";
+import Balance from './components/Balance';
+import { GlobalProvider } from "context/GlobalState";
 
 export default function Dashboard() {
   const iconBoxInside = useColorModeValue("white", "white");
@@ -95,6 +98,11 @@ export default function Dashboard() {
         <TransactionForm
           title={"Calculá tus gastos e ingresos"}
         />
+          <GlobalProvider>
+            <Balance/>
+            <TransactionForm/>
+            <div>Acá se ingresarán las transacciones</div>
+          </GlobalProvider>
 
       </Grid>
       
