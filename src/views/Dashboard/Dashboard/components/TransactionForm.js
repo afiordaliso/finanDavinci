@@ -1,5 +1,5 @@
 // Chakra imports
-import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Divider, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
@@ -15,7 +15,7 @@ const SalesOverview = ({ title, percentage, chart }) => {
             {title}
           </Text>
           <Text fontSize='md' fontWeight='medium' color='gray.400'>
-            En el siguiente formulario podrás ingresar tus transacciones
+            En el siguiente formulario podrás ingresar tus transacciones:
           </Text>
         </Flex>
       </CardHeader>
@@ -25,5 +25,11 @@ const SalesOverview = ({ title, percentage, chart }) => {
     </Card>
   );
 };
+
+function TransactionForm() {
+  return(
+    <div>TransactionForm</div>
+  )
+}
 
 export default SalesOverview;
