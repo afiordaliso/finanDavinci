@@ -101,7 +101,7 @@ export default function Dashboard() {
           <GlobalProvider>
             <Balance/>
             <TransactionForm/>
-            <div>Acá se ingresarán las transacciones</div>
+            <div>Acá se ingresan las transacciones</div>
           </GlobalProvider>
 
       </Grid>
