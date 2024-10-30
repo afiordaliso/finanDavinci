@@ -35,87 +35,62 @@ export default function Dashboard() {
     <Flex flexDirection='column' pt={{ base: "120px", md: "75px" }}>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing='24px'>
         <MiniStatistics
-          title={"Today's Moneys"}
+          title={"Ingresos"}
           amount={"$53,000"}
           percentage={55}
           icon={<WalletIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
         />
         <MiniStatistics
-          title={"Today's Users"}
+          title={"Gastos"}
           amount={"2,300"}
           percentage={5}
           icon={<GlobeIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
         />
         <MiniStatistics
-          title={"New Clients"}
+          title={"Balance"}
           amount={"+3,020"}
           percentage={-14}
           icon={<DocumentIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
         />
         <MiniStatistics
-          title={"Total Sales"}
+          title={"Presupuesto"}
           amount={"$173,000"}
           percentage={8}
           icon={<CartIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
         />
       </SimpleGrid>
       <Grid
-        templateColumns={{ md: "1fr", lg: "1.8fr 1.2fr" }}
+        templateColumns={{ md: "1fr", lg: "2fr 1.2fr" }}
         templateRows={{ md: "1fr auto", lg: "1fr" }}
         my='26px'
         gap='24px'>
         <BuiltByDevelopers
-          title={"Built by Developers"}
-          name={"Purity UI Dashboard"}
+          title={"Finanzas Personales"}
+          name={"finanDavinci"}
+
           description={
-            "From colors, cards, typography to complex elements, you will find the full documentation."
-          }
-          image={
-            <Image
-              src={logoChakra}
-              alt='chakra image'
-              minWidth={{ md: "300px", lg: "auto" }}
-            />
+            "¡Bienvenido/a! En esta plataforma podrás gestionar tus finanzas personales de manera fácil y eficiente. Con herramientas diseñadas para simplificar la administración de tus ingresos y gastos, podrás tener un mayor control para visualizar tus metas financieras."
           }
         />
+
         <WorkWithTheRockets
           backgroundImage={peopleImage}
-          title={"Work with the rockets"}
+          title={"Gestioná tus finanzas con nosotros"}
           description={
-            "Wealth creation is a revolutionary recent positive-sum game. It is all about who takes the opportunity first."
+            "La organización y el seguimiento constante te permitirán tomar decisiones más informadas, mejorar tu estabilidad económica y crear hábitos financieros saludables para un futuro más próspero."
           }
         />
+
       </Grid>
       <Grid
-        templateColumns={{ sm: "1fr", lg: "1.3fr 1.7fr" }}
-        templateRows={{ sm: "repeat(2, 1fr)", lg: "1fr" }}
-        gap='24px'
-        mb={{ lg: "26px" }}>
-        <ActiveUsers
-          title={"Active Users"}
-          percentage={23}
-          chart={<BarChart />}
-        />
-        <SalesOverview
-          title={"Sales Overview"}
-          percentage={5}
-          chart={<LineChart />}
-        />
-      </Grid>
-      <Grid
-        templateColumns={{ sm: "1fr", md: "1fr 1fr", lg: "2fr 1fr" }}
+        templateColumns={{ sm: "1fr", md: "1fr 1fr", lg: "1fr" }}
         templateRows={{ sm: "1fr auto", md: "1fr", lg: "1fr" }}
         gap='24px'>
         <Projects
-          title={"Projects"}
+          title={"Proyectos Ejemplo"}
           amount={30}
           captions={["Companies", "Members", "Budget", "Completion"]}
           data={dashboardTableData}
-        />
-        <OrdersOverview
-          title={"Orders Overview"}
-          amount={30}
-          data={timelineData}
         />
       </Grid>
     </Flex>
