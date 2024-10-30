@@ -58,13 +58,14 @@ export default function Dashboard() {
       </SimpleGrid>
       
       <Grid
-        templateColumns={{ md: "1fr", lg: "1.8fr 1.2fr" }}
+        templateColumns={{ md: "1fr", lg: "10fr 1.2fr" }}
         templateRows={{ md: "1fr auto", lg: "1fr" }}
         my='26px'
         gap='24px'>
         <BuiltByDevelopers
           title={"Finanzas Personales"}
           name={"finanDavinci"}
+
           description={
             "¡Bienvenido/a! En esta plataforma podrás gestionar tus finanzas personales de manera fácil y eficiente. Con herramientas diseñadas para simplificar la administración de tus ingresos y gastos, podrás tener un mayor control para visualizar tus metas financieras."
           }
@@ -76,6 +77,7 @@ export default function Dashboard() {
             />
           }
         />
+
         <WorkWithTheRockets
           backgroundImage={peopleImage}
           title={"Gestioná tus finanzas con nosotros"}
@@ -83,6 +85,7 @@ export default function Dashboard() {
             "La organización y el seguimiento constante te permitirán tomar decisiones más informadas, mejorar tu estabilidad económica y crear hábitos financieros saludables para un futuro más próspero."
           }
         />
+
       </Grid>
 
       <Grid
