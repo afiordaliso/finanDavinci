@@ -101,7 +101,7 @@ export const timelineData = [
   },
   {
     logo: SiDropbox,
-    title: "Pago Adobe",
+    title: "Pago Adobe corporativo",
     date: "19 DIC 11:35 PM",
     color: "purple",
   },
@@ -190,7 +190,7 @@ export const rtlTimelineData = [
   {
     logo: AdobexdLogo,
     title: "#9851258",
-    date: "18 DEC 4:41 PM",
+    date: "18 DIC 4:41 PM",
   },
 ];
 

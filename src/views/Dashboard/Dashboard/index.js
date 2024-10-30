@@ -68,7 +68,7 @@ export default function Dashboard() {
           title={"Creado por FinanDavinci"}
           name={"Panel de gastos"}
           description={
-            "Registra tus gastos, compras, ventas, pedidos, medios de pago y más"
+            "Registra los gastos, proyectos, compras, ventas, pedidos, medios de pago y más de tu empresa"
           }
           image={
             <Image
@@ -82,7 +82,7 @@ export default function Dashboard() {
           backgroundImage={peopleImage}
           title={"Crea grupos de gastos"}
           description={
-            "Reorganiza tus finanzas repartiendo y compartiendo gastos con tus amigos"
+            "Reorganiza las finanzas de tu proyecto"
           }
         />
       </Grid>
@@ -109,7 +109,7 @@ export default function Dashboard() {
         <Projects
           title={"Proyectos"}
           amount={30}
-          captions={["Compañías", "Miembors", "Presupuesto", "Finalizado"]}
+          captions={["Compañías", "Miembros", "Presupuesto", "Finalizado"]}
           data={dashboardTableData}
         />
         <OrdersOverview
