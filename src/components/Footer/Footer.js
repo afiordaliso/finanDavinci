@@ -31,9 +31,9 @@ export default function Footer(props) {
       >
         &copy; {1900 + new Date().getYear()},{" "}
         <Text as="span">
-          Creado con ❤️ por Tu Equipo FinanDavinci
+          Creado con ❤️ por FinanDavinci
         </Text>{" "}
-        para ayudarte a organizar tus finanzas.
+        para ayudarte a gestionar tus finanzas.
       </Text>
       <List display="flex">
         <ListItem
@@ -68,7 +68,7 @@ export default function Footer(props) {
         </ListItem>
         <ListItem>
           <Link color={mainTeal} href="/terms-of-service">
-            Términos de Servicio
+            Términos y Condiciones
           </Link>
         </ListItem>
       </List>
