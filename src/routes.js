@@ -20,6 +20,7 @@ var dashRoutes = [
   {
     path: "/dashboard",
     name: "Dashboard",
+
     icon: <HomeIcon color="inherit" />,
     component: Dashboard,
     layout: "/admin",
@@ -27,6 +28,7 @@ var dashRoutes = [
   {
     path: "/tables",
     name: "Tables",
+
     icon: <StatsIcon color="inherit" />,
     component: Tables,
     layout: "/admin",
@@ -34,18 +36,19 @@ var dashRoutes = [
   {
     path: "/billing",
     name: "Billing",
+
     icon: <CreditIcon color="inherit" />,
     component: Billing,
     layout: "/admin",
   },
   {
-    name: "ACCOUNT PAGES",
-    category: "account",
+
     state: "pageCollapse",
     views: [
       {
         path: "/profile",
         name: "Profile",
+
         icon: <PersonIcon color="inherit" />,
         secondaryNavbar: true,
         component: Profile,
@@ -54,6 +57,7 @@ var dashRoutes = [
       {
         path: "/signin",
         name: "Sign In",
+
         icon: <DocumentIcon color="inherit" />,
         component: SignIn,
         layout: "/auth",
@@ -61,6 +65,7 @@ var dashRoutes = [
       {
         path: "/signup",
         name: "Sign Up",
+
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,
         component: SignUp,
