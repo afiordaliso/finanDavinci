@@ -1,6 +1,7 @@
 // Chakra imports
 import {
   Flex,
+  Box,
   Grid,
   Image,
   SimpleGrid,
@@ -27,9 +28,13 @@ import OrdersOverview from "./components/OrdersOverview";
 import Projects from "./components/Projects";
 import WorkWithTheRockets from "./components/WorkWithTheRockets";
 
-import TransactionForm from "./components/TransactionForm";
-import Balance from './components/Balance';
+import TransactionForm from "./components/transactions/TransactionForm";
+import { Balance } from "./components/Balance";
+import { Header } from "./components/Header";
 import { GlobalProvider } from "context/GlobalState";
+import { TransactionList } from "./components/transactions/TransactionList";
+import { IncomeExpenses } from "./components/IncomeExpenses";
+import { ExpenseChart } from "../../../components/Charts/ExpenseChart";
 
 export default function Dashboard() {
   const iconBoxInside = useColorModeValue("white", "white");
@@ -96,15 +101,24 @@ export default function Dashboard() {
         <Estadisticas
           title={"Estadísticas"}
           percentage={23}
-          chart={<BarChart />}
+          //chart={BarChart}
         />
         <TransactionForm
           title={"Calculá tus gastos e ingresos"}
         />
           <GlobalProvider>
-            <Balance/>
-            <TransactionForm/>
-            <div>Acá se ingresan las transacciones</div>
+            <div className="h-screen flex">
+              <div p-10 rounded-lg flex>
+                <div>
+                  <Header />
+                  <ExpenseChart />
+                  <Balance />
+                  <IncomeExpenses />
+                  <TransactionForm />
+                </div>
+                <TransactionList />
+              </div>
+            </div>
           </GlobalProvider>
 
       </Grid>

@@ -12,6 +12,7 @@ import {
 } from "components/Icons/Icons.js";
 import React from "react";
 import ChartStatistics from "./ChartStatistics";
+import { ExpenseChart } from "components/Charts/ExpenseChart";
 
 const ActiveUsers = ({ title, percentage, chart }) => {
   const iconBoxInside = useColorModeValue("white", "white");
