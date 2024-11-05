@@ -33,7 +33,7 @@ export default function Footer(props) {
         <Text as="span">
           Creado con ❤️ por FinanDavinci
         </Text>{" "}
-        para ayudarte a gestionar tus finanzas.
+        para ayudarte a gestionar las finanzas de tu negocio.
       </Text>
       <List display="flex">
         <ListItem

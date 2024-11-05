@@ -20,8 +20,8 @@ import {
 var dashRoutes = [
   {
     path: "/dashboard",
-    name: "Inicio",
-    rtlName: "لوحة القيادة",
+    name: "Dashboard",
+    rtlName: "dashboard",
     icon: <HomeIcon color="inherit" />,
     component: Dashboard,
     layout: "/admin",
@@ -29,7 +29,7 @@ var dashRoutes = [
   {
     path: "/tables",
     name: "Tables",
-    rtlName: "لوحة القيادة",
+    rtlName: "tables",
     icon: <StatsIcon color="inherit" />,
     component: Tables,
     layout: "/admin",
@@ -37,7 +37,7 @@ var dashRoutes = [
   {
     path: "/billing",
     name: "Billing",
-    rtlName: "لوحة القيادة",
+    rtlName: "billing",
     icon: <CreditIcon color="inherit" />,
     component: Billing,
     layout: "/admin",
@@ -45,7 +45,7 @@ var dashRoutes = [
   {
     path: "/rtl-support-page",
     name: "RTL",
-    rtlName: "آرتيإل",
+    rtlName: "rtl",
     icon: <SupportIcon color="inherit" />,
     component: RTLPage,
     layout: "/rtl",
@@ -53,13 +53,13 @@ var dashRoutes = [
   {
     name: "ACCOUNT PAGES",
     category: "account",
-    rtlName: "صفحات",
+    rtlName: "account",
     state: "pageCollapse",
     views: [
       {
         path: "/profile",
         name: "Profile",
-        rtlName: "لوحة القيادة",
+        rtlName: "profile",
         icon: <PersonIcon color="inherit" />,
         secondaryNavbar: true,
         component: Profile,
@@ -67,16 +67,16 @@ var dashRoutes = [
       },
       {
         path: "/signin",
-        name: "Inicio de Sesión",
-        rtlName: "لوحة القيادة",
+        name: "Sign In",
+        rtlName: "signin",
         icon: <DocumentIcon color="inherit" />,
         component: SignIn,
         layout: "/auth",
       },
       {
         path: "/signup",
-        name: "Registrarse",
-        rtlName: "لوحة القيادة",
+        name: "Sign Up",
+        rtlName: "signup",
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,
         component: SignUp,
