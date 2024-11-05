@@ -32,85 +32,40 @@ import { SiDropbox } from "react-icons/si";
 export const dashboardTableData = [
   {
     logo: AdobexdLogo,
-    name: "Adobe XD",
+
     members: [avatar1, avatar2, avatar3, avatar4, avatar5],
     budget: "$14,000",
     progression: 60,
   },
   {
     logo: AtlassianLogo,
-    name: "Atlass",
+
     members: [avatar3, avatar2],
     budget: "$3,000",
     progression: 10,
   },
   {
     logo: SlackLogo,
-    name: "Slack",
+
     members: [avatar10, avatar4],
     budget: "Not set",
     progression: 100,
   },
   {
     logo: SpotifyLogo,
-    name: "Spotify",
+
     members: [avatar2, avatar3, avatar7, avatar8],
     budget: "$32,000",
     progression: 100,
   },
   {
     logo: JiraLogo,
-    name: "Jira",
+
     members: [avatar10, avatar3, avatar7, avatar2, avatar8],
     budget: "$400",
     progression: 25,
   },
-  {
-    logo: InvisionLogo,
-    name: "Invision",
-    members: [avatar9, avatar3, avatar2],
-    budget: "$7,600",
-    progression: 40,
-  },
-];
 
-export const timelineData = [
-  {
-    logo: FaBell,
-    title: "$2400, Mercado Pago",
-    date: "22 DEC 7:20 PM",
-    color: "teal.300",
-  },
-  {
-    logo: FaHtml5,
-    title: "Nuevo pedido #4219423",
-    date: "21 DIC 11:21 PM",
-    color: "orange",
-  },
-  {
-    logo: FaShoppingCart,
-    title: "Pago realizado #23546",
-    date: "21 DIC 9:28 PM",
-    color: "blue.400",
-  },
-  {
-    logo: FaCreditCard,
-    title: "Tarjeta de crédito registrada #3210145",
-    date: "20 DIC 3:52 PM",
-    color: "orange.300",
-  },
-  {
-    logo: SiDropbox,
-    title: "Pago Adobe corporativo",
-    date: "19 DIC 11:35 PM",
-    color: "purple",
-  },
-  {
-    logo: AdobexdLogo,
-    title: "Nuevo pedido #9851258",
-    date: "18 DEC 4:41 PM",
-  },
-];
 export const rtlDashboardTableData = [
   {
     logo: AdobexdLogo,
