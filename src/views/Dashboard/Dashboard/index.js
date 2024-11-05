@@ -60,7 +60,7 @@ export default function Dashboard() {
         />
       </SimpleGrid>
       <Grid
-        templateColumns={{ md: "1fr", lg: "1.8fr 1.2fr" }}
+        templateColumns={{ md: "1fr", lg: "2fr 1.2fr" }}
         templateRows={{ md: "1fr auto", lg: "1fr" }}
         my='26px'
         gap='24px'>
@@ -78,6 +78,7 @@ export default function Dashboard() {
             />
           }
         />
+
         <WorkWithTheRockets
           backgroundImage={peopleImage}
           title={"Crea grupos de gastos"}
@@ -85,6 +86,7 @@ export default function Dashboard() {
             "Reorganiza las finanzas de tu proyecto"
           }
         />
+
       </Grid>
       <Grid
         templateColumns={{ sm: "1fr", lg: "1.3fr 1.7fr" }}
