@@ -1,6 +1,12 @@
 import { VictoryPie, VictoryLabel } from "victory";
 import { useGlobalState } from "context/GlobalState";
 import { BsPieChartFill } from "react-icons/bs";
+import {
+  Flex,
+  Box,
+  Icon,
+  Text,
+} from "@chakra-ui/react";
 
 export function ExpenseChart() {
   const { transactions } = useGlobalState();
