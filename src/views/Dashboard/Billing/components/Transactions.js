@@ -53,7 +53,7 @@ const Transactions = ({
             fontSize={{ sm: "sm", md: "md" }}
             fontWeight='semibold'
             my='12px'>
-            Nuevas
+            NEWEST
           </Text>
           {newestTransactions.map((row) => {
             return (
@@ -70,7 +70,7 @@ const Transactions = ({
             fontSize={{ sm: "sm", md: "md" }}
             fontWeight='semibold'
             my='12px'>
-            Antiguas
+            OLDER
           </Text>
           {olderTransactions.map((row) => {
             return (
