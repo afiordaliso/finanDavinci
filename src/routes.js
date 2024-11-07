@@ -7,6 +7,7 @@ import Profile from "views/Dashboard/Profile";
 import SignIn from "views/Auth/SignIn.js";
 import SignUp from "views/Auth/SignUp.js";
 
+
 import {
   HomeIcon,
   StatsIcon,
@@ -21,44 +22,33 @@ var dashRoutes = [
   {
     path: "/dashboard",
     name: "Inicio",
-    rtlName: "لوحة القيادة",
     icon: <HomeIcon color="inherit" />,
     component: Dashboard,
     layout: "/admin",
   },
   {
-    path: "/tables",
-    name: "Tables",
-    rtlName: "لوحة القيادة",
-    icon: <StatsIcon color="inherit" />,
+    path: "/nosotros",
+    name: "Nosotros",
+    icon: <PersonIcon color="inherit" />,
     component: Tables,
-    layout: "/admin",
+    layout: "/nosotros",
   },
   {
-    path: "/billing",
-    name: "Billing",
-    rtlName: "لوحة القيادة",
-    icon: <CreditIcon color="inherit" />,
+    path: "/contacto",
+    name: "Contacto",
+    icon: <DocumentIcon color="inherit" />,
     component: Billing,
     layout: "/admin",
   },
   {
-    path: "/rtl-support-page",
-    name: "RTL",
-    rtlName: "آرتيإل",
-    icon: <SupportIcon color="inherit" />,
-    component: RTLPage,
-    layout: "/rtl",
-  },
-  {
-    name: "ACCOUNT PAGES",
+    name: "Administración",
     category: "account",
     rtlName: "صفحات",
     state: "pageCollapse",
     views: [
       {
         path: "/profile",
-        name: "Profile",
+        name: "Usuarios",
         rtlName: "لوحة القيادة",
         icon: <PersonIcon color="inherit" />,
         secondaryNavbar: true,
@@ -76,6 +66,15 @@ var dashRoutes = [
       {
         path: "/signup",
         name: "Registrarse",
+        rtlName: "لوحة القيادة",
+        icon: <RocketIcon color="inherit" />,
+        secondaryNavbar: true,
+        component: SignUp,
+        layout: "/auth",
+      },
+      {
+        path: "/category",
+        name: "Gestionar Categoria",
         rtlName: "لوحة القيادة",
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,

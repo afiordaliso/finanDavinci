@@ -2,15 +2,10 @@
 import {
   Flex,
   Grid,
-  Image,
   SimpleGrid,
   useColorModeValue,
 } from "@chakra-ui/react";
-// assets
-import peopleImage from "assets/img/people-image.png";
-import logoChakra from "assets/svg/logo-white.svg";
-import BarChart from "components/Charts/BarChart";
-import LineChart from "components/Charts/LineChart";
+
 // Custom icons
 import {
   CartIcon,
@@ -19,17 +14,22 @@ import {
   WalletIcon,
 } from "components/Icons/Icons.js";
 import React from "react";
-import { dashboardTableData, timelineData } from "variables/general";
-import ActiveUsers from "./components/ActiveUsers";
-import BuiltByDevelopers from "./components/BuiltByDevelopers";
+import { 
+  newestTransactions,
+  olderTransactions
+} from "variables/general";
 import MiniStatistics from "./components/MiniStatistics";
-import OrdersOverview from "./components/OrdersOverview";
-import Projects from "./components/Projects";
-import SalesOverview from "./components/SalesOverview";
-import WorkWithTheRockets from "./components/WorkWithTheRockets";
+import Transactions from "./components/Transactions";
+import RegistroContable from "./components/RegistroContable.js";
+import Pie from "./components/Pie.js";
 
 export default function Dashboard() {
   const iconBoxInside = useColorModeValue("white", "white");
+  const textColor = useColorModeValue("gray.400", "white");
+  const pieData = {
+    labels: ['Sueldo', 'Supermercado', 'Ahorros', 'Alquiler', 'Auto', 'Varios'],
+    values: [300, 50, 100, 80, 120, 90],
+};
 
   return (
     <Flex flexDirection='column' pt={{ base: "120px", md: "75px" }}>
@@ -59,39 +59,27 @@ export default function Dashboard() {
           icon={<CartIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
         />
       </SimpleGrid>
+
       <Grid
-        templateColumns={{ md: "1fr", lg: "2fr 1.2fr" }}
-        templateRows={{ md: "1fr auto", lg: "1fr" }}
-        my='26px'
+        templateColumns={{ sm: "1fr", md: "1fr 1fr" }}
         gap='24px'>
-        <BuiltByDevelopers
-          title={"Finanzas Personales"}
-          name={"finanDavinci"}
-
-          description={
-            "¡Bienvenido/a! En esta plataforma podrás gestionar tus finanzas personales de manera fácil y eficiente. Con herramientas diseñadas para simplificar la administración de tus ingresos y gastos, podrás tener un mayor control para visualizar tus metas financieras."
-          }
-        />
-
-        <WorkWithTheRockets
-          backgroundImage={peopleImage}
-          title={"Gestioná tus finanzas con nosotros"}
-          description={
-            "La organización y el seguimiento constante te permitirán tomar decisiones más informadas, mejorar tu estabilidad económica y crear hábitos financieros saludables para un futuro más próspero."
-          }
-        />
-
+        <RegistroContable
+          title={"Payment Method"}>
+        </RegistroContable>
+        <Pie data={pieData} title="Distribución de Datos" />
       </Grid>
+        
       <Grid
-        templateColumns={{ sm: "1fr", md: "1fr 1fr", lg: "1fr" }}
-        templateRows={{ sm: "1fr auto", md: "1fr", lg: "1fr" }}
-        gap='24px'>
-        <Projects
-          title={"Proyectos Ejemplo"}
-          amount={30}
-          captions={["Companies", "Members", "Budget", "Completion"]}
-          data={dashboardTableData}
-        />
+      templateColumns={{ sm: "1fr", md: "1fr 1fr", lg: "1fr" }}
+      templateRows={{ sm: "1fr auto", md: "1fr", lg: "1fr" }}
+      gap='24px'>
+
+        <Transactions
+          title={"Transacciones"}
+          date={"27 Nov - 30 Marz"}
+          newestTransactions={newestTransactions}
+          olderTransactions={olderTransactions}
+          />
       </Grid>
     </Flex>
   );
