@@ -6,7 +6,6 @@ import Profile from "views/Dashboard/Profile";
 import SignIn from "views/Auth/SignIn.js";
 import SignUp from "views/Auth/SignUp.js";
 
-
 import {
   HomeIcon,
   StatsIcon,
@@ -20,31 +19,36 @@ import {
 var dashRoutes = [
   {
     path: "/dashboard",
-    name: "Inicio",
+    name: "Dashboard",
+
     icon: <HomeIcon color="inherit" />,
     component: Dashboard,
     layout: "/admin",
   },
   {
-    path: "/nosotros",
-    name: "Nosotros",
-    icon: <PersonIcon color="inherit" />,
+    path: "/tables",
+    name: "Tables",
+
+    icon: <StatsIcon color="inherit" />,
     component: Tables,
-    layout: "/nosotros",
+    layout: "/admin",
   },
   {
-    path: "/contacto",
-    name: "Contacto",
-    icon: <DocumentIcon color="inherit" />,
+    path: "/billing",
+    name: "Billing",
+
+    icon: <CreditIcon color="inherit" />,
     component: Billing,
     layout: "/admin",
   },
   {
+
     state: "pageCollapse",
     views: [
       {
         path: "/profile",
-        name: "Usuarios",
+        name: "Profile",
+
         icon: <PersonIcon color="inherit" />,
         secondaryNavbar: true,
         component: Profile,
@@ -62,15 +66,6 @@ var dashRoutes = [
         path: "/signup",
         name: "Sign Up",
 
-        icon: <RocketIcon color="inherit" />,
-        secondaryNavbar: true,
-        component: SignUp,
-        layout: "/auth",
-      },
-      {
-        path: "/category",
-        name: "Gestionar Categoria",
-        rtlName: "لوحة القيادة",
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,
         component: SignUp,
