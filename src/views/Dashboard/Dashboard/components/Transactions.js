@@ -18,7 +18,7 @@ const Transactions = ({
   const textColor = useColorModeValue("gray.700", "white");
 
   return (
-    <Card my='24px' ms={{ lg: "24px" }}>
+    <Card my='24px' ms={{ lg: "5px" }}>
       <CardHeader mb='12px'>
         <Flex direction='column' w='100%'>
           <Flex
@@ -26,7 +26,7 @@ const Transactions = ({
             justify={{ sm: "center", lg: "space-between" }}
             align={{ sm: "center" }}
             w='100%'
-            my={{ md: "12px" }}>
+            my={{ md: "5px" }}>
             <Text
               color={textColor}
               fontSize={{ sm: "lg", md: "xl", lg: "lg" }}
