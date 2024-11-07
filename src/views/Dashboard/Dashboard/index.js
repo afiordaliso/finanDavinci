@@ -1,6 +1,7 @@
 // Chakra imports
 import {
   Flex,
+  Box,
   Grid,
   SimpleGrid,
   useColorModeValue,
@@ -14,6 +15,7 @@ import {
   WalletIcon,
 } from "components/Icons/Icons.js";
 import React from "react";
+
 import { 
   newestTransactions,
   olderTransactions
@@ -22,6 +24,15 @@ import MiniStatistics from "./components/MiniStatistics";
 import Transactions from "./components/Transactions";
 import RegistroContable from "./components/RegistroContable.js";
 import Pie from "./components/Pie.js";
+
+
+import TransactionForm from "./components/transactions/TransactionForm";
+import { Balance } from "./components/Balance";
+import { Header } from "./components/Header";
+import { GlobalProvider } from "context/GlobalState";
+import { TransactionList } from "./components/transactions/TransactionList";
+import { IncomeExpenses } from "./components/IncomeExpenses";
+import { ExpenseChart } from "../../../components/Charts/ExpenseChart";
 
 export default function Dashboard() {
   const iconBoxInside = useColorModeValue("white", "white");
@@ -35,34 +46,29 @@ export default function Dashboard() {
     <Flex flexDirection='column' pt={{ base: "120px", md: "75px" }}>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing='24px'>
         <MiniStatistics
-          title={"Ingresos"}
+          title={"Dinero en cuenta"}
           amount={"$53,000"}
           percentage={55}
           icon={<WalletIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
         />
         <MiniStatistics
-          title={"Gastos"}
+          title={"Usuarios"}
           amount={"2,300"}
           percentage={5}
           icon={<GlobeIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
         />
         <MiniStatistics
-          title={"Balance"}
+          title={"Clientes nuevos"}
           amount={"+3,020"}
           percentage={-14}
           icon={<DocumentIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
         />
-        <MiniStatistics
-          title={"Presupuesto"}
-          amount={"$173,000"}
-          percentage={8}
-          icon={<CartIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
-        />
-      </SimpleGrid>
 
+      </SimpleGrid>
       <Grid
         templateColumns={{ sm: "1fr", md: "1fr 1fr" }}
         gap='24px'>
+
         <RegistroContable
           title={"Payment Method"}>
         </RegistroContable>
@@ -80,6 +86,7 @@ export default function Dashboard() {
           newestTransactions={newestTransactions}
           olderTransactions={olderTransactions}
           />
+
       </Grid>
     </Flex>
   );

@@ -2,7 +2,6 @@
 import Dashboard from "views/Dashboard/Dashboard";
 import Tables from "views/Dashboard/Tables";
 import Billing from "views/Dashboard/Billing";
-import RTLPage from "views/Dashboard/RTL";
 import Profile from "views/Dashboard/Profile";
 import SignIn from "views/Auth/SignIn.js";
 import SignUp from "views/Auth/SignUp.js";
@@ -41,15 +40,11 @@ var dashRoutes = [
     layout: "/admin",
   },
   {
-    name: "Administración",
-    category: "account",
-    rtlName: "صفحات",
     state: "pageCollapse",
     views: [
       {
         path: "/profile",
         name: "Usuarios",
-        rtlName: "لوحة القيادة",
         icon: <PersonIcon color="inherit" />,
         secondaryNavbar: true,
         component: Profile,
@@ -57,16 +52,16 @@ var dashRoutes = [
       },
       {
         path: "/signin",
-        name: "Inicio de Sesión",
-        rtlName: "لوحة القيادة",
+        name: "Sign In",
+
         icon: <DocumentIcon color="inherit" />,
         component: SignIn,
         layout: "/auth",
       },
       {
         path: "/signup",
-        name: "Registrarse",
-        rtlName: "لوحة القيادة",
+        name: "Sign Up",
+
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,
         component: SignUp,
