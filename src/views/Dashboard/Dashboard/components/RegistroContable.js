@@ -63,6 +63,7 @@ return (
                 <Select>
     <option value="1">Sueldo</option>
     <option value="2">Supermercado</option>
+    <option value="2">Alquiler</option>
   </Select>
             <Button
                 fontSize="10px"
