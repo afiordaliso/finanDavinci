@@ -5,26 +5,29 @@ import Footer from 'components/Footer/Footer.js';
 import AdminNavbar from 'components/Navbars/AdminNavbar.js';
 import Sidebar from 'components/Sidebar';
 import React, { useState } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import routes from 'routes.js';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 // Custom Chakra theme
 import theme from 'theme/theme.js';
-import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
 // Custom components
 import MainPanel from '../components/Layout/MainPanel';
 import PanelContainer from '../components/Layout/PanelContainer';
 import PanelContent from '../components/Layout/PanelContent';
+
 export default function Dashboard(props) {
 	const { ...rest } = props;
 	// states and functions
-	const [ sidebarVariant, setSidebarVariant ] = useState('transparent');
-	const [ fixed, setFixed ] = useState(false);
+	const [sidebarVariant, setSidebarVariant] = useState('transparent');
+	const [fixed, setFixed] = useState(false);
+	const location = useLocation(); // Get current location
+	const { isOpen, onOpen, onClose } = useDisclosure();
+
 	// functions for changing the states from components
 	const getRoute = () => {
-		return window.location.pathname !== '/admin/full-screen-maps';
+		return window.location.pathname !== '/user/full-screen-maps';
 	};
 	const getActiveRoute = (routes) => {
 		let activeRoute = 'Default Brand Text';
@@ -74,30 +77,37 @@ export default function Dashboard(props) {
 			if (prop.category === 'account') {
 				return getRoutes(prop.views);
 			}
-			if (prop.layout === '/admin') {
+			if (prop.layout === '/user') {
 				return <Route path={prop.layout + prop.path} component={prop.component} key={key} />;
 			} else {
 				return null;
 			}
 		});
 	};
-	const { isOpen, onOpen, onClose } = useDisclosure();
-	document.documentElement.dir = 'ltr';
+
 	// Chakra Color Mode
+	document.documentElement.dir = 'ltr';
+
+	// Check if the current path is "/user/dashboard"
+	const isUserDashboard = location.pathname === '/user/dashboard';
+
 	return (
 		<ChakraProvider theme={theme} resetCss={false}>
-			<Sidebar
-				routes={routes}
-				logoText={'FinanDavinci'}
-				display='none'
-				sidebarVariant={sidebarVariant}
-				{...rest}
-			/>
+			{/* Show Sidebar only if the path is "/user/dashboard" */}
+			{isUserDashboard && (
+				<Sidebar
+					routes={routes}
+					logoText={'FinanDavinci'}
+					sidebarVariant={sidebarVariant}
+					{...rest}
+				/>
+			)}
 			<MainPanel
 				w={{
 					base: '100%',
-					xl: 'calc(100% - 275px)'
-				}}>
+					xl: isUserDashboard ? 'calc(100% - 275px)' : '100%',
+				}}
+			>
 				<Portal>
 					<AdminNavbar
 						onOpen={onOpen}
@@ -113,12 +123,11 @@ export default function Dashboard(props) {
 						<PanelContainer>
 							<Switch>
 								{getRoutes(routes)}
-								<Redirect from='/admin' to='/admin/dashboard' />
+								<Redirect from='/user' to='/user/dashboard' />
 							</Switch>
 						</PanelContainer>
 					</PanelContent>
 				) : null}
-				<Footer />
 			</MainPanel>
 		</ChakraProvider>
 	);
