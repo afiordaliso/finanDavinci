@@ -17,7 +17,8 @@ import {
 var dashRoutes = [
   {
     path: "/dashboard",
-    name: "Inicio",
+    name: "Dashboard",
+
     icon: <HomeIcon color="inherit" />,
     component: Dashboard,
     layout: "/admin",
@@ -38,26 +39,26 @@ var dashRoutes = [
     component: Nosotros,
     layout: "/user",
     isAdminOption: false, // Siempre visible
+
   },
   {
-    path: "/contacto",
-    name: "Contacto",
-    icon: <DocumentIcon color="inherit" />,
+    path: "/billing",
+    name: "Billing",
+
+    icon: <CreditIcon color="inherit" />,
     component: Billing,
     layout: "/admin",
     isAdminOption: false, // Siempre visible
   },
   {
-    name: "Administración",
-    category: "account",
-    rtlName: "صفحات",
+
     state: "pageCollapse",
     isAdminOption: true, // Ocultar para usuarios en /user
     views: [
       {
         path: "/profile",
-        name: "Usuarios",
-        rtlName: "لوحة القيادة",
+        name: "Profile",
+
         icon: <PersonIcon color="inherit" />,
         secondaryNavbar: true,
         component: Profile,
@@ -65,25 +66,16 @@ var dashRoutes = [
       },
       {
         path: "/signin",
-        name: "Inicio de Sesión",
-        rtlName: "لوحة القيادة",
+        name: "Sign In",
+
         icon: <DocumentIcon color="inherit" />,
         component: SignIn,
         layout: "/auth",
       },
       {
         path: "/signup",
-        name: "Registrarse",
-        rtlName: "لوحة القيادة",
-        icon: <RocketIcon color="inherit" />,
-        secondaryNavbar: true,
-        component: SignUp,
-        layout: "/auth",
-      },
-      {
-        path: "/category",
-        name: "Gestionar Categoria",
-        rtlName: "لوحة القيادة",
+        name: "Sign Up",
+
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,
         component: SignUp,
@@ -94,3 +86,4 @@ var dashRoutes = [
 ];
 
 export default dashRoutes;
+

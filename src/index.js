@@ -24,6 +24,7 @@ import AdminLayout from "layouts/Admin.js";
 import UserLayout from "layouts/User.js";
 import RTLLayout from "layouts/RTL.js";
 
+
 ReactDOM.render(
   <HashRouter>
     <Switch>
