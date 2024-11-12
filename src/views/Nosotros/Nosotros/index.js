@@ -11,6 +11,7 @@ import {
 import Footer from "components/Footer/Footer.js";
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import theme from "theme/theme.js";
+import BgSignUp from "assets/img/BgSignUp.png";
 
 const teamMembers = [
   {
@@ -47,6 +48,7 @@ export default function Nosotros(props) {
         py={100}
         textAlign="center"
         borderRadius="10px"
+        bgImage={BgSignUp}
       >
         <Heading as="h1" size="xl" mb={5}>
           Sobre Nosotros

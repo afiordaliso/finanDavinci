@@ -3,6 +3,7 @@ import { ChakraProvider, Box, Heading, Text, FormControl, FormLabel, Input, Text
 import theme from 'theme/theme.js';
 import Footer from "components/Footer/Footer.js";
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
+import BgSignUp from "assets/img/BgSignUp.png";
 
 export default function ContactPage() {
   return (
@@ -18,6 +19,7 @@ export default function ContactPage() {
         py={100}
         textAlign="center"
         borderRadius="10px"
+        bgImage={BgSignUp} 
       >
         <Heading as="h1" size="xl" mb={5}>
           Contáctanos
