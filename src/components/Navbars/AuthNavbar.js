@@ -14,6 +14,8 @@ import {
   HomeIcon,
   PersonIcon,
   RocketIcon,
+  GlobeIcon,
+  HelpIcon,
 } from "components/Icons/Icons";
 import SidebarResponsive from "components/Sidebar/SidebarResponsive";
 import PropTypes from "prop-types";
@@ -117,6 +119,22 @@ export default function AuthNavbar(props) {
           <Text>Nosotros</Text>
         </Button>
       </NavLink>
+      <NavLink to="/user/Contacto">
+        <Button
+          fontSize="sm"
+          ms="0px"
+          me="0px"
+          px="0px"
+          me={{ sm: "2px", md: "16px" }}
+          color={navbarIcon}
+          variant="transparent-with-icon"
+          leftIcon={
+            <HelpIcon  color={navbarIcon} w="12px" h="12px" me="0px" />
+          }
+        >
+          <Text>Contacto</Text>
+        </Button>
+      </NavLink>
     </HStack>
   );
   return (
@@ -148,7 +166,6 @@ export default function AuthNavbar(props) {
             logoText={props.logoText}
             secondary={props.secondary}
             routes={routes}
-            // logo={logo}
             {...rest}
           />
         </Box>
@@ -157,7 +174,6 @@ export default function AuthNavbar(props) {
     </Flex>
   );
 }
-
 AuthNavbar.propTypes = {
   color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
   brandText: PropTypes.string,

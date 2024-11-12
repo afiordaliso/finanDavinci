@@ -6,7 +6,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-// Custom icons
+import Footer from "components/Footer/Footer.js";
+
 import {
   CartIcon,
   DocumentIcon,
@@ -81,6 +82,8 @@ export default function Dashboard() {
           olderTransactions={olderTransactions}
           />
       </Grid>
+      <Footer />
     </Flex>
+    
   );
 }
