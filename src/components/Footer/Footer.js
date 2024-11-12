@@ -42,7 +42,7 @@ export default function Footer(props) {
             md: "44px",
           }}
         >
-          <Link color={mainTeal} href="/about">
+          <Link color={mainTeal} href="../user/nosotros">
             Sobre Nosotros
           </Link>
         </ListItem>

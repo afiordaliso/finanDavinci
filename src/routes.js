@@ -1,11 +1,14 @@
 // Importación de componentes
 import Dashboard from "views/Dashboard/Dashboard";
 import Nosotros from "views/Nosotros/Nosotros";
+import Contacto from "views/Contacto/Contacto";
 import Tables from "views/Dashboard/Tables";
 import Billing from "views/Dashboard/Billing";
 import Profile from "views/Dashboard/Profile";
 import SignIn from "views/Auth/SignIn.js";
 import SignUp from "views/Auth/SignUp.js";
+import UserAdmin from "views/Usuarios/Usuarios";
+import Categorias from "views/Categorias/Categorias";
 
 import {
   HomeIcon,
@@ -21,7 +24,7 @@ var dashRoutes = [
     icon: <HomeIcon color="inherit" />,
     component: Dashboard,
     layout: "/admin",
-    isAdminOption: true, // Ocultar para usuarios en /user
+    isAdminOption: true,
   },
   {
     path: "/dashboard",
@@ -29,7 +32,7 @@ var dashRoutes = [
     icon: <HomeIcon color="inherit" />,
     component: Dashboard,
     layout: "/user",
-    isAdminOption: false, // Mostrar para usuarios en /user
+    isAdminOption: false,
   },
   {
     path: "/nosotros",
@@ -37,30 +40,30 @@ var dashRoutes = [
     icon: <PersonIcon color="inherit" />,
     component: Nosotros,
     layout: "/user",
-    isAdminOption: false, // Siempre visible
+    isAdminOption: false,
   },
   {
     path: "/contacto",
     name: "Contacto",
     icon: <DocumentIcon color="inherit" />,
-    component: Billing,
-    layout: "/admin",
-    isAdminOption: false, // Siempre visible
+    component: Contacto,
+    layout: "/user",
+    isAdminOption: false,
   },
   {
     name: "Administración",
     category: "account",
     rtlName: "صفحات",
     state: "pageCollapse",
-    isAdminOption: true, // Ocultar para usuarios en /user
+    isAdminOption: true,
     views: [
       {
-        path: "/profile",
+        path: "/usuarios",
         name: "Usuarios",
         rtlName: "لوحة القيادة",
         icon: <PersonIcon color="inherit" />,
         secondaryNavbar: true,
-        component: Profile,
+        component: UserAdmin,
         layout: "/admin",
       },
       {
@@ -81,13 +84,13 @@ var dashRoutes = [
         layout: "/auth",
       },
       {
-        path: "/category",
-        name: "Gestionar Categoria",
+        path: "/categorias",
+        name: "Categorias",
         rtlName: "لوحة القيادة",
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,
-        component: SignUp,
-        layout: "/auth",
+        component: Categorias,
+        layout: "/admin",
       },
     ],
   },
