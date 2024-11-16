@@ -22,6 +22,8 @@ import CardHeader from "components/Card/CardHeader.js";
 import IconBox from "components/Icons/IconBox";
 import React from "react";
 import { FaPencilAlt } from "react-icons/fa";
+import { olderTransactions } from "variables/general";
+import { newestTransactions } from "variables/general";
 
 const RegistroContable = ({ title, mastercard, visa }) => {
 const iconTeal = useColorModeValue("teal.300", "teal.300");
