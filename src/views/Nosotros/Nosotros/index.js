@@ -8,7 +8,7 @@ import {
   SimpleGrid,
   Portal,
 } from "@chakra-ui/react";
-import Footer from "components/Footer/Footer.js";
+//import Footer from "components/Footer/Footer.js";
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import theme from "theme/theme.js";
 import BgSignUp from "assets/img/BgSignUp.png";
@@ -96,7 +96,7 @@ export default function Nosotros(props) {
           ))}
         </SimpleGrid>
       </Box>
-      <Footer />
+
     </ChakraProvider>
   );
 }

@@ -8,7 +8,6 @@ import {
   HStack,
   Icon,
   Input,
-  Link,
   Switch,
   Text,
   useColorModeValue,
@@ -17,6 +16,7 @@ import {
 import BgSignUp from "assets/img/BgSignUp.png";
 import React from "react";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
+import {Link} from "react-router-dom";
 
 function SignUp() {
   const titleColor = useColorModeValue("teal.300", "teal.200");
@@ -52,7 +52,7 @@ function SignUp() {
         mt='6.5rem'
         mb='30px'>
         <Text fontSize='4xl' color='white' fontWeight='bold'>
-          Welcome!
+          ¡Bienvenido!
         </Text>
         <Text
           fontSize='md'
@@ -61,8 +61,7 @@ function SignUp() {
           mt='10px'
           mb='26px'
           w={{ base: "90%", sm: "60%", lg: "40%", xl: "30%" }}>
-          Use these awesome forms to login or create new account in your project
-          for free.
+          Regístrate para que puedas acceder a las funcionalidades de la plataforma
         </Text>
       </Flex>
       <Flex alignItems='center' justifyContent='center' mb='60px' mt='20px'>
@@ -81,7 +80,7 @@ function SignUp() {
             fontWeight='bold'
             textAlign='center'
             mb='22px'>
-            Register With
+            Regístrate con
           </Text>
           <HStack spacing='15px' justify='center' mb='22px'>
             <Flex
@@ -94,14 +93,14 @@ function SignUp() {
               cursor='pointer'
               transition='all .25s ease'
               _hover={{ filter: "brightness(120%)", bg: bgIcons }}>
-              <Link href='#'>
+              <a href='https://www.facebook.com/' target="_blank" rel="noopener noreferrer">
                 <Icon
                   as={FaFacebook}
                   w='30px'
                   h='30px'
                   _hover={{ filter: "brightness(120%)" }}
                 />
-              </Link>
+              </a>
             </Flex>
             <Flex
               justify='center'
@@ -113,33 +112,14 @@ function SignUp() {
               cursor='pointer'
               transition='all .25s ease'
               _hover={{ filter: "brightness(120%)", bg: bgIcons }}>
-              <Link href='#'>
-                <Icon
-                  as={FaApple}
-                  w='30px'
-                  h='30px'
-                  _hover={{ filter: "brightness(120%)" }}
-                />
-              </Link>
-            </Flex>
-            <Flex
-              justify='center'
-              align='center'
-              w='75px'
-              h='75px'
-              borderRadius='15px'
-              border='1px solid lightgray'
-              cursor='pointer'
-              transition='all .25s ease'
-              _hover={{ filter: "brightness(120%)", bg: bgIcons }}>
-              <Link href='#'>
+              <a href='https://www.gmail.com/mail/help/intl/es/about.html?iframe' target="_blank" rel="noopener noreferrer">
                 <Icon
                   as={FaGoogle}
                   w='30px'
                   h='30px'
                   _hover={{ filter: "brightness(120%)" }}
                 />
-              </Link>
+              </a>
             </Flex>
           </HStack>
           <Text
@@ -148,18 +128,18 @@ function SignUp() {
             fontWeight='bold'
             textAlign='center'
             mb='22px'>
-            or
+            o completa el formulario
           </Text>
           <FormControl>
             <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-              Name
+              Nombre
             </FormLabel>
             <Input
               fontSize='sm'
               ms='4px'
               borderRadius='15px'
               type='text'
-              placeholder='Your full name'
+              placeholder='Tu nombre completo'
               mb='24px'
               size='lg'
             />
@@ -171,26 +151,26 @@ function SignUp() {
               ms='4px'
               borderRadius='15px'
               type='email'
-              placeholder='Your email address'
+              placeholder='Tu dirección de email'
               mb='24px'
               size='lg'
             />
             <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-              Password
+              Contraseña
             </FormLabel>
             <Input
               fontSize='sm'
               ms='4px'
               borderRadius='15px'
               type='password'
-              placeholder='Your password'
+              placeholder='Tu contraseña'
               mb='24px'
               size='lg'
             />
             <FormControl display='flex' alignItems='center' mb='24px'>
               <Switch id='remember-login' colorScheme='teal' me='10px' />
               <FormLabel htmlFor='remember-login' mb='0' fontWeight='normal'>
-                Remember me
+                Recuérdame
               </FormLabel>
             </FormControl>
             <Button
@@ -208,7 +188,7 @@ function SignUp() {
               _active={{
                 bg: "teal.400",
               }}>
-              SIGN UP
+              REGISTRATE
             </Button>
           </FormControl>
           <Flex
@@ -218,15 +198,15 @@ function SignUp() {
             maxW='100%'
             mt='0px'>
             <Text color={textColor} fontWeight='medium'>
-              Already have an account?
-              <Link
+              ¿Ya tienes una cuenta?
+              <Box
+                as="span"
                 color={titleColor}
-                as='span'
-                ms='5px'
-                href='#'
-                fontWeight='bold'>
-                Sign In
-              </Link>
+                ms="5px"
+                fontWeight="bold"
+              >
+                <Link to="/auth/signin">Ingresa sesión aquí</Link>
+              </Box>
             </Text>
           </Flex>
         </Flex>

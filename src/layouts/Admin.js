@@ -1,6 +1,5 @@
 // Chakra imports
 import { ChakraProvider, Portal, useDisclosure } from '@chakra-ui/react';
-import Footer from 'components/Footer/Footer.js';
 // Layout components
 import AdminNavbar from 'components/Navbars/AdminNavbar.js';
 import Sidebar from 'components/Sidebar';
@@ -10,6 +9,7 @@ import routes from 'routes.js';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import Footer from "components/Footer/Footer.js";
 // Custom Chakra theme
 import theme from 'theme/theme.js';
 import FixedPlugin from '../components/FixedPlugin/FixedPlugin';
@@ -121,5 +121,6 @@ export default function Dashboard(props) {
 				<Footer />
 			</MainPanel>
 		</ChakraProvider>
+		
 	);
 }

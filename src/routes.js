@@ -11,25 +11,32 @@ import UserAdmin from "views/Usuarios/Usuarios";
 import Categorias from "views/Categorias/Categorias";
 
 import {
-  HomeIcon,
-  PersonIcon,
-  DocumentIcon,
   RocketIcon,
 } from "components/Icons/Icons";
+
+import {
+  InicioRolesIcon,
+  InicioTablero,
+  NosotrosIcon,
+  ContactoIcon,
+  GestionUsuarios,
+  GestionCategorias,
+  LoginIcon,
+} from "components/Icons/Iconos";
 
 var dashRoutes = [
   {
     path: "/dashboard",
     name: "Inicio",
-    icon: <HomeIcon color="inherit" />,
+    icon: <InicioTablero />,
     component: Dashboard,
     layout: "/admin",
     isAdminOption: true,
   },
   {
     path: "/dashboard",
-    name: "Inicio Usuarios",
-    icon: <HomeIcon color="inherit" />,
+    name: "Inicio: Usuarios",
+    icon: <InicioRolesIcon />,
     component: Dashboard,
     layout: "/user",
     isAdminOption: false,
@@ -37,7 +44,7 @@ var dashRoutes = [
   {
     path: "/nosotros",
     name: "Nosotros",
-    icon: <PersonIcon color="inherit" />,
+    icon: <NosotrosIcon />,
     component: Nosotros,
     layout: "/user",
     isAdminOption: false,
@@ -45,7 +52,7 @@ var dashRoutes = [
   {
     path: "/contacto",
     name: "Contacto",
-    icon: <DocumentIcon color="inherit" />,
+    icon: <ContactoIcon />,
     component: Contacto,
     layout: "/user",
     isAdminOption: false,
@@ -59,18 +66,27 @@ var dashRoutes = [
     views: [
       {
         path: "/usuarios",
-        name: "Usuarios",
+        name: "Gestión de Usuarios",
         rtlName: "لوحة القيادة",
-        icon: <PersonIcon color="inherit" />,
+        icon: <GestionUsuarios />,
         secondaryNavbar: true,
         component: UserAdmin,
+        layout: "/admin",
+      },
+      {
+        path: "/categorias",
+        name: "Gestión de Categorías",
+        rtlName: "لوحة القيادة",
+        icon: <GestionCategorias />,
+        secondaryNavbar: true,
+        component: Categorias,
         layout: "/admin",
       },
       {
         path: "/signin",
         name: "Inicio de Sesión",
         rtlName: "لوحة القيادة",
-        icon: <DocumentIcon color="inherit" />,
+        icon: <LoginIcon />,
         component: SignIn,
         layout: "/auth",
       },
@@ -82,15 +98,6 @@ var dashRoutes = [
         secondaryNavbar: true,
         component: SignUp,
         layout: "/auth",
-      },
-      {
-        path: "/categorias",
-        name: "Categorias",
-        rtlName: "لوحة القيادة",
-        icon: <RocketIcon color="inherit" />,
-        secondaryNavbar: true,
-        component: Categorias,
-        layout: "/admin",
       },
     ],
   },

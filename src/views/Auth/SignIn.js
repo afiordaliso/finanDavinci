@@ -1,4 +1,6 @@
 import React from "react";
+import {Link} from "react-router-dom";
+
 // Chakra imports
 import {
   Box,
@@ -8,13 +10,12 @@ import {
   FormLabel,
   Heading,
   Input,
-  Link,
   Switch,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-// Assets
 
+// Assets
 function SignIn() {
   // Chakra color mode
   const titleColor = useColorModeValue("teal.300", "teal.200");
@@ -117,9 +118,9 @@ function SignIn() {
             >
               <Text color={textColor} fontWeight="medium">
                 No tienes cuenta?
-                <Link color={titleColor} as="span" ms="5px" fontWeight="bold">
-                  Registrarse
-                </Link>
+                <Box as="span" color={titleColor} ms="5px" fontWeight="bold">
+                  <Link to="/auth/signup">Registrarse</Link>
+                </Box>
               </Text>
             </Flex>
           </Flex>

@@ -1,6 +1,6 @@
-
 import React from "react";
-import { Flex, Link, List, ListItem, Text, useColorModeValue } from "@chakra-ui/react";
+import { Flex, List, Box, ListItem, Text, useColorModeValue } from "@chakra-ui/react";
+import {Link} from "react-router-dom";
 
 export default function Footer(props) {
   
@@ -42,9 +42,9 @@ export default function Footer(props) {
             md: "44px",
           }}
         >
-          <Link color={mainTeal} href="../user/nosotros">
-            Sobre Nosotros
-          </Link>
+          <Box as="span" color={mainTeal} ms="5px">
+            <Link to="/user/nosotros">Sobre Nosotros</Link>
+          </Box>
         </ListItem>
         <ListItem
           me={{
@@ -52,9 +52,9 @@ export default function Footer(props) {
             md: "44px",
           }}
         >
-          <Link color={mainTeal} href="/privacy-policy">
-            Política de Privacidad
-          </Link>
+          <Box as="span" color={mainTeal} ms="5px">
+            <Link to="/user/Contacto">Contáctanos</Link>
+          </Box>
         </ListItem>
         <ListItem
           me={{
@@ -62,14 +62,15 @@ export default function Footer(props) {
             md: "44px",
           }}
         >
-          <Link color={mainTeal} href="/blog">
-            Blog
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link color={mainTeal} href="/terms-of-service">
-            Términos y Condiciones
-          </Link>
+          <a
+            href="https://www.bancodeserviciosfinancieros.com.ar/blog-educacion-financiera/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Box as="span" color={mainTeal}>
+              Blog
+            </Box>
+          </a>
         </ListItem>
       </List>
     </Flex>

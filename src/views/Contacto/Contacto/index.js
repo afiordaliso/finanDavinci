@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChakraProvider, Box, Heading, Text, FormControl, FormLabel, Input, Textarea, Button, VStack, Portal } from '@chakra-ui/react';
 import theme from 'theme/theme.js';
-import Footer from "components/Footer/Footer.js";
+//import Footer from "components/Footer/Footer.js";
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import BgSignUp from "assets/img/BgSignUp.png";
 
@@ -60,7 +60,6 @@ export default function ContactPage() {
         <Text fontSize="md" mb={2}>Correo: contacto@finandavinci.com</Text>
         <Text fontSize="md">Dirección: Calle Falsa 123, CABA, Argentina</Text>
       </Box>
-      <Footer />
     </ChakraProvider>
   );
 }

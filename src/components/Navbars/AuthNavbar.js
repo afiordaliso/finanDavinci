@@ -17,6 +17,9 @@ import {
   GlobeIcon,
   HelpIcon,
 } from "components/Icons/Icons";
+import contactoIcon from 'assets/img/iconos/contactoIcon.png';
+import inicioTablero from '../../assets/img/iconos/inicioTablero.png';
+import nosotrosIcon from 'assets/img/iconos/nosotrosIcon.png';
 import SidebarResponsive from "components/Sidebar/SidebarResponsive";
 import PropTypes from "prop-types";
 import React from "react";
@@ -93,12 +96,14 @@ export default function AuthNavbar(props) {
         <Button
           fontSize="sm"
           ms="0px"
-          me="0px"
+          //me="0px"
           px="0px"
           me={{ sm: "2px", md: "16px" }}
           color={navbarIcon}
           variant="transparent-with-icon"
-          leftIcon={<HomeIcon color={navbarIcon} w="12px" h="12px" me="0px" />}
+          leftIcon={
+            <img src={inicioTablero} alt="inicio" width="24px" height="24px" />
+          }
         >
           <Text>Tablero</Text>
         </Button>
@@ -107,13 +112,13 @@ export default function AuthNavbar(props) {
         <Button
           fontSize="sm"
           ms="0px"
-          me="0px"
+          //me="0px"
           px="0px"
           me={{ sm: "2px", md: "16px" }}
           color={navbarIcon}
           variant="transparent-with-icon"
           leftIcon={
-            <PersonIcon color={navbarIcon} w="12px" h="12px" me="0px" />
+            <img src={nosotrosIcon} alt="nosotros" width="24px" height="24px" />
           }
         >
           <Text>Nosotros</Text>
@@ -123,13 +128,13 @@ export default function AuthNavbar(props) {
         <Button
           fontSize="sm"
           ms="0px"
-          me="0px"
+          //me="0px"
           px="0px"
           me={{ sm: "2px", md: "16px" }}
           color={navbarIcon}
           variant="transparent-with-icon"
           leftIcon={
-            <HelpIcon  color={navbarIcon} w="12px" h="12px" me="0px" />
+            < img src={contactoIcon} alt="Formulario de Contacto" width="24px" height="24px" />
           }
         >
           <Text>Contacto</Text>
