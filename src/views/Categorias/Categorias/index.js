@@ -22,38 +22,44 @@ import {
   Input,
   FormControl,
   FormLabel,
+  Select,
 } from '@chakra-ui/react';
 import { EditIcon, DeleteIcon, AddIcon } from '@chakra-ui/icons';
 import theme from 'theme/theme.js';
 
 export default function CategoryPage() {
   const [categories, setCategories] = useState([
-    { id: 1, nombre: 'Sueldo' },
-    { id: 2, nombre: 'Otros' },
-    { id: 3, nombre: 'Supermercado' },
+    { id: 1, nombre: 'Sueldo', tipoTransaccion: 'Ingreso' },
+    { id: 2, nombre: 'Otros', tipoTransaccion: 'Ingreso' },
+    { id: 3, nombre: 'Supermercado', tipoTransaccion: 'Gasto' },
   ]);
   const [newCategory, setNewCategory] = useState('');
+  const [newTransaction, setNewTransaction] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [editName, setEditName] = useState('');
+  const [editTransaccion, setEditTransaccion] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
   const toast = useToast();
 
   const handleAddCategory = () => {
-    if (newCategory.trim() === '') {
+    if (!newCategory.trim() || !newTransaction) {
       toast({
-        title: 'El nombre de la categoría es obligatorio.',
+        title: 'Error',
+        description: 'Todos los campos son obligatorios.',
         status: 'error',
         duration: 3000,
         isClosable: true,
       });
       return;
     }
-    const newCat = { id: Date.now(), nombre: newCategory };
+    const newCat = { id: Date.now(), nombre: newCategory, tipoTransaccion: newTransaction };
     setCategories([...categories, newCat]);
     setNewCategory('');
+    setNewTransaction('');
     toast({
-      title: `Categoría "${newCategory}" agregada`,
+      title: 'Categoría agregada',
+      description: `La categoría "${newCategory}" ha sido agregada con éxito.`,
       status: 'success',
       duration: 3000,
       isClosable: true,
@@ -63,17 +69,31 @@ export default function CategoryPage() {
   const handleEditCategory = (category) => {
     setSelectedCategory(category);
     setEditName(category.nombre);
+    setEditTransaccion(category.tipoTransaccion);
     onOpen();
   };
 
   const saveChanges = () => {
+    if (!editName.trim() || !editTransaccion) {
+      toast({
+        title: 'Error',
+        description: 'Todos los campos son obligatorios.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
     setCategories((prevCategories) =>
       prevCategories.map((cat) =>
-        cat.id === selectedCategory.id ? { ...cat, nombre: editName } : cat
+        cat.id === selectedCategory.id
+          ? { ...cat, nombre: editName, tipoTransaccion: editTransaccion }
+          : cat
       )
     );
     toast({
-      title: `Categoría "${editName}" actualizada`,
+      title: 'Categoría actualizada',
+      description: `La categoría "${editName}" ha sido actualizada con éxito.`,
       status: 'success',
       duration: 3000,
       isClosable: true,
@@ -89,7 +109,8 @@ export default function CategoryPage() {
   const confirmDelete = () => {
     setCategories(categories.filter((cat) => cat.id !== selectedCategory.id));
     toast({
-      title: `Categoría "${selectedCategory.nombre}" eliminada`,
+      title: 'Categoría eliminada',
+      description: `La categoría "${selectedCategory.nombre}" ha sido eliminada.`,
       status: 'success',
       duration: 3000,
       isClosable: true,
@@ -108,7 +129,16 @@ export default function CategoryPage() {
             onChange={(e) => setNewCategory(e.target.value)}
             placeholder="Nombre de la categoría"
           />
-          <Button mt={3} colorScheme="teal" leftIcon={<AddIcon />} onClick={handleAddCategory}>
+          <FormLabel mt={4}>Tipo de Transacción</FormLabel>
+          <Select
+            value={newTransaction}
+            onChange={(e) => setNewTransaction(e.target.value)}
+            placeholder="Seleccionar tipo"
+          >
+            <option value="Ingreso">Ingreso</option>
+            <option value="Gasto">Gasto</option>
+          </Select>
+          <Button mt={5} colorScheme="teal" leftIcon={<AddIcon />} onClick={handleAddCategory}>
             Agregar Categoría
           </Button>
         </FormControl>
@@ -117,6 +147,7 @@ export default function CategoryPage() {
           <Thead bg="teal.200">
             <Tr>
               <Th color="white">Nombre</Th>
+              <Th color="white">Tipo de Transacción</Th>
               <Th color="white">Gestión</Th>
             </Tr>
           </Thead>
@@ -124,6 +155,7 @@ export default function CategoryPage() {
             {categories.map((category) => (
               <Tr key={category.id}>
                 <Td>{category.nombre}</Td>
+                <Td>{category.tipoTransaccion}</Td>
                 <Td>
                   <IconButton
                     icon={<EditIcon />}
@@ -159,12 +191,24 @@ export default function CategoryPage() {
                   onChange={(e) => setEditName(e.target.value)}
                 />
               </FormControl>
+              <FormControl mt={4}>
+                <FormLabel>Tipo de Transacción</FormLabel>
+                <Select
+                  value={editTransaccion}
+                  onChange={(e) => setEditTransaccion(e.target.value)}
+                >
+                  <option value="Ingreso">Ingreso</option>
+                  <option value="Gasto">Gasto</option>
+                </Select>
+              </FormControl>
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="blue" mr={3} onClick={saveChanges}>
                 Guardar Cambios
               </Button>
-              <Button variant="ghost" onClick={onClose}>Cancelar</Button>
+              <Button variant="ghost" onClick={onClose}>
+                Cancelar
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
@@ -176,13 +220,16 @@ export default function CategoryPage() {
             <ModalHeader>Confirmar Eliminación</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              ¿Estás seguro de que deseas eliminar la categoría <strong>{selectedCategory?.nombre}</strong>?
+              ¿Estás seguro de que deseas eliminar la categoría{' '}
+              <strong>{selectedCategory?.nombre}</strong>?
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="red" mr={3} onClick={confirmDelete}>
                 Eliminar
               </Button>
-              <Button variant="ghost" onClick={onDeleteClose}>Cancelar</Button>
+              <Button variant="ghost" onClick={onDeleteClose}>
+                Cancelar
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

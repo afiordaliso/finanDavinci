@@ -55,16 +55,15 @@ return (
                 type="text"
                 placeholder="Ingrese el importe"
                 size="lg"
-                />
-
+            />
                 <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Categoria
                 </FormLabel>
                 <Select>
-    <option value="1">Sueldo</option>
-    <option value="2">Supermercado</option>
-    <option value="3">Alquiler</option>
-  </Select>
+                    <option value="1">Sueldo</option>
+                    <option value="2">Supermercado</option>
+                    <option value="3">Alquiler</option>
+                </Select>
             <Button
                 fontSize="10px"
                 type="submit"
