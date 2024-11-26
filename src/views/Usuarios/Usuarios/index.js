@@ -22,6 +22,7 @@ import {
   Input,
   FormControl,
   FormLabel,
+  Select,
 } from '@chakra-ui/react';
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
 import theme from 'theme/theme.js';
@@ -135,20 +136,24 @@ export default function UserTable() {
               </FormControl>
               <FormControl>
                 <FormLabel>Rol</FormLabel>
-                <Input
-                  type="text"
+                <Select
                   name="rol"
                   value={editValues.rol}
                   onChange={handleInputChange}
-                  placeholder="Rol del usuario"
-                />
+                  placeholder="Seleccionar rol"
+                >
+                  <option value="Usuario">Usuario</option>
+                  <option value="Administrador">Administrador</option>
+                </Select>
               </FormControl>
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="blue" mr={3} onClick={saveChanges}>
                 Guardar Cambios
               </Button>
-              <Button variant="ghost" onClick={onClose}>Cancelar</Button>
+              <Button variant="ghost" onClick={onClose}>
+                Cancelar
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
@@ -166,7 +171,9 @@ export default function UserTable() {
               <Button colorScheme="red" mr={3} onClick={confirmDelete}>
                 Eliminar
               </Button>
-              <Button variant="ghost" onClick={onDeleteClose}>Cancelar</Button>
+              <Button variant="ghost" onClick={onDeleteClose}>
+                Cancelar
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
