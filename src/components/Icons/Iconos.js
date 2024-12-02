@@ -7,6 +7,7 @@ import contactoIcon from 'assets/img/iconos/contactoIcon.png';
 import gestionUsuarios from 'assets/img/iconos/gestionUsuarios.png';
 import gestionCategorias from 'assets/img/iconos/gestionCategorias.png';
 import loginIcon from 'assets/img/iconos/loginIcon.png';
+import singOut from 'assets/img/iconos/signOut.png';
 
 export const InicioRolesIcon = () => (
   <Box as="img" src={inicioRoles} alt="inicioRolesIcon" width="24px" height="24px" />
@@ -34,4 +35,7 @@ export const GestionCategorias = () => (
 
 export const LoginIcon = () => (
   <Box as="img" src={loginIcon} alt="loginIcon" width="24px" height="24px" />
+);
+export const LogoutIcon = () => (
+  <Box as="img" src={singOut} alt="loginIcon" width="24px" height="24px" />
 );

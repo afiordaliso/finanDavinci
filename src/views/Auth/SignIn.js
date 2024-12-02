@@ -1,7 +1,5 @@
-import React from "react";
-import {Link} from "react-router-dom";
-
-// Chakra imports
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -15,11 +13,57 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-// Assets
 function SignIn() {
-  // Chakra color mode
   const titleColor = useColorModeValue("teal.300", "teal.200");
   const textColor = useColorModeValue("gray.400", "white");
+
+  const [mail, setEmail] = useState("");
+  const [contrasena, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
+
+  const history = useHistory(); // Hook para redirigir
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ mail, contrasena }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        // Guardar datos en localStorage
+        if (remember) {
+          localStorage.setItem("token", data.token);
+        }
+        localStorage.setItem("role", data.id_rol);
+  
+        // Emitir evento de usuario logueado
+        window.dispatchEvent(new Event("userLoggedIn"));
+  
+        // Redirigir según el rol
+        if (data.id_rol === 1) {
+          history.push("/admin/dashboard");
+        } else if (data.id_rol === 2) {
+          history.push("/user/dashboard");
+        } else {
+          alert("Rol no reconocido");
+        }
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error.message);
+      alert("No se pudo conectar con el servidor. Por favor, inténtelo de nuevo más tarde.");
+    }
+  };
+
   return (
     <Flex position="relative" mb="40px">
       <Flex
@@ -64,9 +108,11 @@ function SignIn() {
                 borderRadius="15px"
                 mb="24px"
                 fontSize="sm"
-                type="text"
+                type="email"
                 placeholder="Ingrese su correo"
                 size="lg"
+                value={mail}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <FormLabel ms="4px" fontSize="sm" fontWeight="normal">
                 Contraseña
@@ -78,9 +124,17 @@ function SignIn() {
                 type="password"
                 placeholder="Ingrese su contraseña"
                 size="lg"
+                value={contrasena}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <FormControl display="flex" alignItems="center">
-                <Switch id="remember-login" colorScheme="teal" me="10px" />
+                <Switch
+                  id="remember-login"
+                  colorScheme="teal"
+                  me="10px"
+                  isChecked={remember}
+                  onChange={() => setRemember(!remember)}
+                />
                 <FormLabel
                   htmlFor="remember-login"
                   mb="0"
@@ -105,6 +159,7 @@ function SignIn() {
                 _active={{
                   bg: "teal.400",
                 }}
+                onClick={handleLogin}
               >
                 Ingresar
               </Button>
