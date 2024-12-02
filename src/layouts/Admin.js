@@ -27,26 +27,20 @@ export default function Dashboard(props) {
 		return window.location.pathname !== '/admin/full-screen-maps';
 	};
 	const getActiveRoute = (routes) => {
-		let activeRoute = 'Default Brand Text';
-		for (let i = 0; i < routes.length; i++) {
-			if (routes[i].collapse) {
-				let collapseActiveRoute = getActiveRoute(routes[i].views);
-				if (collapseActiveRoute !== activeRoute) {
-					return collapseActiveRoute;
-				}
-			} else if (routes[i].category) {
-				let categoryActiveRoute = getActiveRoute(routes[i].views);
-				if (categoryActiveRoute !== activeRoute) {
-					return categoryActiveRoute;
-				}
-			} else {
-				if (window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1) {
-					return routes[i].name;
-				}
-			}
+		if (!routes || !Array.isArray(routes)) {
+		  console.error("Routes is undefined or not an array:", routes);
+		  return "Default Route Name";
 		}
-		return activeRoute;
-	};
+	  
+		for (let i = 0; i < routes.length; i++) {
+		  if (
+			window.location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1
+		  ) {
+			return routes[i].name;
+		  }
+		}
+		return "Default Route Name";
+	  };
 	// This changes navbar state(fixed or not)
 	const getActiveNavbar = (routes) => {
 		let activeNavbar = false;

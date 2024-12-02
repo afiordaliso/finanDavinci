@@ -1,45 +1,76 @@
-// Importación de componentes
+import React from "react";
 import Dashboard from "views/Dashboard/Dashboard";
 import Nosotros from "views/Nosotros/Nosotros";
 import Contacto from "views/Contacto/Contacto";
-import Tables from "views/Dashboard/Tables";
-import Billing from "views/Dashboard/Billing";
-import Profile from "views/Dashboard/Profile";
-import SignIn from "views/Auth/SignIn.js";
-import SignUp from "views/Auth/SignUp.js";
 import UserAdmin from "views/Usuarios/Usuarios";
 import Categorias from "views/Categorias/Categorias";
+import SignIn from "views/Auth/SignIn.js";
+import SignUp from "views/Auth/SignUp.js";
+import { Redirect } from "react-router-dom";
 
-import {
-  RocketIcon,
-} from "components/Icons/Icons";
-
-import {
-  InicioRolesIcon,
+import { 
   InicioTablero,
   NosotrosIcon,
   ContactoIcon,
   GestionUsuarios,
   GestionCategorias,
-  LoginIcon,
+  LogoutIcon,
 } from "components/Icons/Iconos";
 
-var dashRoutes = [
+// Verifica el rol almacenado en el localStorage
+const role = localStorage.getItem("role") || "";
+
+// Define las rutas de administrador solo si el rol es "1" (admin)
+const adminRoutes = role === "1" ? [
   {
     path: "/dashboard",
     name: "Inicio",
     icon: <InicioTablero />,
     component: Dashboard,
     layout: "/admin",
-    isAdminOption: true,
   },
   {
+    name: "Administración",
+    category: "account",
+    state: "pageCollapse",
+    views: [
+      {
+        path: "/usuarios",
+        name: "Gestión de Usuarios",
+        icon: <GestionUsuarios />,
+        component: UserAdmin,
+        layout: "/admin",
+      },
+      {
+        path: "/categorias",
+        name: "Gestión de Categorías",
+        icon: <GestionCategorias />,
+        component: Categorias,
+        layout: "/admin",
+      },
+    ],
+  },
+  {
+    path: "/logout",
+    name: "Cerrar Sesión",
+    icon: <LogoutIcon />,
+    component: () => {
+      localStorage.removeItem("token");
+      localStorage.clear();
+      return <Redirect to="/auth/signin" />;
+    },
+    layout: "/admin",
+  },
+] : [];
+
+// Define las rutas de usuario si el rol es "2"
+const userRoutes = role === "2" ? [
+  {
     path: "/dashboard",
-    name: "Inicio: Usuarios",
-    icon: <InicioRolesIcon />,
+    name: "Inicio",
+    icon: <InicioTablero />,
     component: Dashboard,
     layout: "/user",
-    isAdminOption: false,
   },
   {
     path: "/nosotros",
@@ -47,7 +78,6 @@ var dashRoutes = [
     icon: <NosotrosIcon />,
     component: Nosotros,
     layout: "/user",
-    isAdminOption: false,
   },
   {
     path: "/contacto",
@@ -55,52 +85,43 @@ var dashRoutes = [
     icon: <ContactoIcon />,
     component: Contacto,
     layout: "/user",
-    isAdminOption: false,
   },
   {
-    name: "Administración",
-    category: "account",
-    rtlName: "صفحات",
-    state: "pageCollapse",
-    isAdminOption: true,
-    views: [
-      {
-        path: "/usuarios",
-        name: "Gestión de Usuarios",
-        rtlName: "لوحة القيادة",
-        icon: <GestionUsuarios />,
-        secondaryNavbar: true,
-        component: UserAdmin,
-        layout: "/admin",
-      },
-      {
-        path: "/categorias",
-        name: "Gestión de Categorías",
-        rtlName: "لوحة القيادة",
-        icon: <GestionCategorias />,
-        secondaryNavbar: true,
-        component: Categorias,
-        layout: "/admin",
-      },
-      {
-        path: "/signin",
-        name: "Inicio de Sesión",
-        rtlName: "لوحة القيادة",
-        icon: <LoginIcon />,
-        component: SignIn,
-        layout: "/auth",
-      },
-      {
-        path: "/signup",
-        name: "Registrarse",
-        rtlName: "لوحة القيادة",
-        icon: <RocketIcon color="inherit" />,
-        secondaryNavbar: true,
-        component: SignUp,
-        layout: "/auth",
-      },
-    ],
+    path: "/logout",
+    name: "Cerrar Sesión",
+    icon: <LogoutIcon />,
+    component: () => {
+      localStorage.removeItem("token");
+      localStorage.clear();
+      return <Redirect to="/auth/signin" />;
+    },
+    layout: "/user",
+  },
+] : [];
+
+// Rutas comunes para todos los roles
+const commonRoutes = [
+  {
+    path: "/signin",
+    component: SignIn,
+    layout: "/auth",
+  },
+  {
+    path: "/signup",
+    component: SignUp,
+    layout: "/auth",
   },
 ];
 
+// Definir `dashRoutes` según el rol
+let dashRoutes = [];
+if (role === "1") {
+  dashRoutes = [...adminRoutes];
+} else if (role === "2") {
+  dashRoutes = [...userRoutes];
+} else {
+  dashRoutes = [...commonRoutes];
+}
+
+// Exportar `dashRoutes`
 export default dashRoutes;

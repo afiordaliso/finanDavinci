@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ChakraProvider,
   Box,
@@ -26,24 +26,41 @@ import {
 } from '@chakra-ui/react';
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
 import theme from 'theme/theme.js';
+import axios from 'axios';
 
-const usersData = [
-  { id: 1, usuario: 'Juan Pérez', rol: 'Administrador' },
-  { id: 2, usuario: 'Ana Gómez', rol: 'Usuario' },
-  { id: 3, usuario: 'Carlos Ruiz', rol: 'Usuario' },
-];
+const API_URL = 'http://localhost:5000/api/usuarios';
 
-export default function UserTable() {
-  const [users, setUsers] = useState(usersData);
-  const [selectedUser, setSelectedUser] = useState(null);
+export default function usuariosTable() {
+  const [usuarios, setusuarios] = useState([]);
+  const [selectedusuarios, setSelectedusuarios] = useState(null);
   const [editValues, setEditValues] = useState({ usuario: '', rol: '' });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
   const toast = useToast();
 
-  const handleEdit = (user) => {
-    setSelectedUser(user);
-    setEditValues({ usuario: user.usuario, rol: user.rol });
+  // Obtener usuarios de la API al montar el componente
+  useEffect(() => {
+    fetchusuarios();
+  }, []);
+
+  const fetchusuarios = async () => {
+    try {
+      const response = await axios.get(API_URL);
+      setusuarios(response.data);
+    } catch (error) {
+      toast({
+        title: 'Error al cargar los usuarios',
+        description: error.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const handleEdit = (usuarios) => {
+    setSelectedusuarios(usuarios);
+    setEditValues({ usuario: usuarios.usuario, rol: usuarios.rol });
     onOpen();
   };
 
@@ -52,33 +69,53 @@ export default function UserTable() {
     setEditValues((prev) => ({ ...prev, [name]: value }));
   };
 
-  const saveChanges = () => {
-    setUsers((prevUsers) =>
-      prevUsers.map((user) => (user.id === selectedUser.id ? { ...user, ...editValues } : user))
-    );
-    toast({
-      title: `Usuario ${editValues.usuario} actualizado`,
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
-    onClose();
+  const saveChanges = async () => {
+    try {
+      await axios.put(`${API_URL}/${selectedusuarios.id}`, editValues);
+      toast({
+        title: `Usuario ${editValues.usuario} actualizado`,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+      fetchusuarios(); // Actualizar lista después de la edición
+      onClose();
+    } catch (error) {
+      toast({
+        title: 'Error al actualizar el usuario',
+        description: error.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
-  const handleDelete = (user) => {
-    setSelectedUser(user);
+  const handleDelete = (usuarios) => {
+    setSelectedusuarios(usuarios);
     onDeleteOpen();
   };
 
-  const confirmDelete = () => {
-    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== selectedUser.id));
-    toast({
-      title: `Usuario ${selectedUser.usuario} eliminado`,
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
-    onDeleteClose();
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(`${API_URL}/${selectedusuarios.id}`);
+      toast({
+        title: `Usuario ${selectedusuarios.usuario} eliminado`,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+      fetchusuarios(); // Actualizar lista después de la eliminación
+      onDeleteClose();
+    } catch (error) {
+      toast({
+        title: 'Error al eliminar el usuario',
+        description: error.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -93,22 +130,22 @@ export default function UserTable() {
             </Tr>
           </Thead>
           <Tbody>
-            {users.map((user) => (
-              <Tr key={user.id}>
-                <Td>{user.usuario}</Td>
-                <Td>{user.rol}</Td>
+            {usuarios.map((usuarios) => (
+              <Tr key={usuarios.id}>
+                <Td>{usuarios.mail}</Td>
+                <Td>{usuarios.rol_nombre}</Td>
                 <Td>
                   <IconButton
                     icon={<EditIcon />}
                     colorScheme="blue"
                     mr={2}
-                    onClick={() => handleEdit(user)}
+                    onClick={() => handleEdit(usuarios)}
                     aria-label="Editar usuario"
                   />
                   <IconButton
                     icon={<DeleteIcon />}
                     colorScheme="red"
-                    onClick={() => handleDelete(user)}
+                    onClick={() => handleDelete(usuarios)}
                     aria-label="Eliminar usuario"
                   />
                 </Td>
@@ -165,7 +202,7 @@ export default function UserTable() {
             <ModalHeader>Confirmar Eliminación</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              ¿Estás seguro de que deseas eliminar al usuario <strong>{selectedUser?.usuario}</strong>?
+              ¿Estás seguro de que deseas eliminar al usuario <strong>{selectedusuarios?.usuario}</strong>?
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="red" mr={3} onClick={confirmDelete}>
