@@ -14,7 +14,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Assets
-import signInImage from "assets/img/signInImage.png";
+
 
 function SignIn() {
   // Chakra color mode
@@ -42,7 +42,7 @@ function SignIn() {
             p='48px'
             mt={{ md: "150px", lg: "80px" }}>
             <Heading color={titleColor} fontSize='32px' mb='10px'>
-              Welcome Back
+              Bienvenidos
             </Heading>
             <Text
               mb='36px'
@@ -50,29 +50,29 @@ function SignIn() {
               color={textColor}
               fontWeight='bold'
               fontSize='14px'>
-              Enter your email and password to sign in
+              Ingrese su correo y su contraseña
             </Text>
             <FormControl>
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-                Email
+                Correo
               </FormLabel>
               <Input
                 borderRadius='15px'
                 mb='24px'
                 fontSize='sm'
                 type='text'
-                placeholder='Your email adress'
+                placeholder='Ingrese su correo'
                 size='lg'
               />
               <FormLabel ms='4px' fontSize='sm' fontWeight='normal'>
-                Password
+                Contraseña
               </FormLabel>
               <Input
                 borderRadius='15px'
                 mb='36px'
                 fontSize='sm'
                 type='password'
-                placeholder='Your password'
+                placeholder='Ingrese su contraseña'
                 size='lg'
               />
               <FormControl display='flex' alignItems='center'>
@@ -82,7 +82,7 @@ function SignIn() {
                   mb='0'
                   ms='1'
                   fontWeight='normal'>
-                  Remember me
+                  Recordar Cuenta
                 </FormLabel>
               </FormControl>
               <Button
@@ -100,7 +100,7 @@ function SignIn() {
                 _active={{
                   bg: "teal.400",
                 }}>
-                SIGN IN
+                Ingresar
               </Button>
             </FormControl>
             <Flex
@@ -110,9 +110,9 @@ function SignIn() {
               maxW='100%'
               mt='0px'>
               <Text color={textColor} fontWeight='medium'>
-                Don't have an account?
+                No tienes cuenta?
                 <Link color={titleColor} as='span' ms='5px' fontWeight='bold'>
-                  Sign Up
+                  Registrarse
                 </Link>
               </Text>
             </Flex>
@@ -125,14 +125,6 @@ function SignIn() {
           w='40vw'
           position='absolute'
           right='0px'>
-          <Box
-            bgImage={signInImage}
-            w='100%'
-            h='100%'
-            bgSize='cover'
-            bgPosition='50%'
-            position='absolute'
-            borderBottomLeftRadius='20px'></Box>
         </Box>
       </Flex>
     </Flex>
