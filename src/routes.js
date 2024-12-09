@@ -57,7 +57,9 @@ const adminRoutes = role === "1" ? [
     component: () => {
       localStorage.removeItem("token");
       localStorage.clear();
-      return <Redirect to="/auth/signin" />;
+      window.location.href = "/auth/signin"; // Forzar actualización de la página
+      //return <Redirect to="/auth/signin" />;
+      return null; 
     },
     layout: "/admin",
   },
@@ -93,7 +95,9 @@ const userRoutes = role === "2" ? [
     component: () => {
       localStorage.removeItem("token");
       localStorage.clear();
-      return <Redirect to="/auth/signin" />;
+      window.location.href = "/auth/signin"; // Forzar actualización de la página
+      //return <Redirect to="/auth/signin" />;
+      return null; 
     },
     layout: "/user",
   },
