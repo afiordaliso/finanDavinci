@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ChakraProvider,
   Box,
@@ -26,23 +26,40 @@ import {
 } from '@chakra-ui/react';
 import { EditIcon, DeleteIcon, AddIcon } from '@chakra-ui/icons';
 import theme from 'theme/theme.js';
+import axios from 'axios';
 
 export default function CategoryPage() {
-  const [categories, setCategories] = useState([
-    { id: 1, nombre: 'Sueldo', tipoTransaccion: 'Ingreso' },
-    { id: 2, nombre: 'Otros', tipoTransaccion: 'Ingreso' },
-    { id: 3, nombre: 'Supermercado', tipoTransaccion: 'Gasto' },
-  ]);
+  const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState('');
   const [newTransaction, setNewTransaction] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [editName, setEditName] = useState('');
-  const [editTransaccion, setEditTransaccion] = useState('');
+  const [editValues, setEditValues] = useState({ nombre: '', tipoTransaccion: '' });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
   const toast = useToast();
 
-  const handleAddCategory = () => {
+  const API_URL = 'http://localhost:5000/api/categorias';
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(API_URL);
+      setCategories(response.data);
+    } catch (error) {
+      toast({
+        title: 'Error al cargar las categorías.',
+        description: error.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const handleAddCategory = async () => {
     if (!newCategory.trim() || !newTransaction) {
       toast({
         title: 'Error',
@@ -53,69 +70,93 @@ export default function CategoryPage() {
       });
       return;
     }
-    const newCat = { id: Date.now(), nombre: newCategory, tipoTransaccion: newTransaction };
-    setCategories([...categories, newCat]);
-    setNewCategory('');
-    setNewTransaction('');
-    toast({
-      title: 'Categoría agregada',
-      description: `La categoría "${newCategory}" ha sido agregada con éxito.`,
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
-  };
 
-  const handleEditCategory = (category) => {
-    setSelectedCategory(category);
-    setEditName(category.nombre);
-    setEditTransaccion(category.tipoTransaccion);
-    onOpen();
-  };
+    try {
+      const response = await axios.post(API_URL, {
+        nombre: newCategory,
+        tipoTransaccion: newTransaction,
+      });
 
-  const saveChanges = () => {
-    if (!editName.trim() || !editTransaccion) {
+      setCategories([...categories, response.data]);
+      setNewCategory('');
+      setNewTransaction('');
+      toast({
+        title: 'Categoría agregada',
+        description: `La categoría "${newCategory}" ha sido agregada con éxito.`,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error) {
       toast({
         title: 'Error',
-        description: 'Todos los campos son obligatorios.',
+        description: error.message,
         status: 'error',
         duration: 3000,
         isClosable: true,
       });
-      return;
     }
-    setCategories((prevCategories) =>
-      prevCategories.map((cat) =>
-        cat.id === selectedCategory.id
-          ? { ...cat, nombre: editName, tipoTransaccion: editTransaccion }
-          : cat
-      )
-    );
-    toast({
-      title: 'Categoría actualizada',
-      description: `La categoría "${editName}" ha sido actualizada con éxito.`,
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
-    onClose();
   };
 
-  const handleDelete = (category) => {
-    setSelectedCategory(category);
+  const handleEdit = (categoria) => {
+    setSelectedCategory({...categoria});
+    setEditValues({ nombre: categoria.nombre, tipoTransaccion: categoria.tipoTransaccion });
+    onOpen();
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const saveChanges = async () => {
+    try {
+      await axios.put(`${API_URL}/${selectedCategory.id}`, editValues);
+      toast({
+        title: `Categoría "${editValues.nombre}" actualizada`,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+      fetchCategories();
+      onClose();
+    } catch (error) {
+      toast({
+        title: 'Error al actualizar la categoría',
+        description: error.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const handleDelete = (categorias) => {
+    setSelectedCategory({...categorias});
     onDeleteOpen();
   };
 
-  const confirmDelete = () => {
-    setCategories(categories.filter((cat) => cat.id !== selectedCategory.id));
-    toast({
-      title: 'Categoría eliminada',
-      description: `La categoría "${selectedCategory.nombre}" ha sido eliminada.`,
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
-    onDeleteClose();
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(`${API_URL}/${selectedCategory.id}`);
+      setCategories(categories.filter((cat) => cat.id !== selectedCategory.id)); // Filtrar la categoría eliminada
+      toast({
+        title: `Categoría ${selectedCategory.nombre} eliminada`,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+      setSelectedCategory(null); // Limpiar el estado después de eliminar
+      onDeleteClose();
+    } catch (error) {
+      toast({
+        title: 'Error al eliminar la categoría',
+        description: error.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -161,7 +202,7 @@ export default function CategoryPage() {
                     icon={<EditIcon />}
                     colorScheme="blue"
                     mr={2}
-                    onClick={() => handleEditCategory(category)}
+                    onClick={() => handleEdit(category)}
                     aria-label="Editar categoría"
                   />
                   <IconButton
@@ -176,7 +217,6 @@ export default function CategoryPage() {
           </Tbody>
         </Table>
 
-        {/* Modal de Editar Categoría */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
@@ -184,18 +224,20 @@ export default function CategoryPage() {
             <ModalCloseButton />
             <ModalBody>
               <FormControl>
-                <FormLabel>Nombre de la categoría</FormLabel>
+                <FormLabel>Categoría</FormLabel>
                 <Input
                   type="text"
-                  value={editName}
-                  onChange={(e) => setEditName(e.target.value)}
+                  name="nombre"
+                  value={editValues.nombre}
+                  onChange={handleInputChange}
                 />
               </FormControl>
               <FormControl mt={4}>
                 <FormLabel>Tipo de Transacción</FormLabel>
                 <Select
-                  value={editTransaccion}
-                  onChange={(e) => setEditTransaccion(e.target.value)}
+                  name="tipoTransaccion"
+                  value={editValues.tipoTransaccion}
+                  onChange={handleInputChange}
                 >
                   <option value="Ingreso">Ingreso</option>
                   <option value="Gasto">Gasto</option>
@@ -213,15 +255,13 @@ export default function CategoryPage() {
           </ModalContent>
         </Modal>
 
-        {/* Modal de Confirmación de Eliminar */}
         <Modal isOpen={isDeleteOpen} onClose={onDeleteClose}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Confirmar Eliminación</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              ¿Estás seguro de que deseas eliminar la categoría{' '}
-              <strong>{selectedCategory?.nombre}</strong>?
+              ¿Estás seguro de que deseas eliminar la categoría <strong>{selectedCategory?.nombre}</strong>?
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="red" mr={3} onClick={confirmDelete}>
