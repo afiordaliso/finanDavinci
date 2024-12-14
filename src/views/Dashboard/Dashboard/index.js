@@ -23,10 +23,7 @@ import RegistroContable from "./components/RegistroContable.js";
 import Pie from "./components/Pie.js";
 
 export default function Dashboard() {
-
-    // Forzar la recarga de la página automáticamente
-    
-
+  
   const iconBoxInside = useColorModeValue("white", "white");
   const textColor = useColorModeValue("gray.400", "white");
   const pieData = {
