@@ -3,8 +3,7 @@ import React from "react";
 
 function TransactionRow(props) {
   const textColor = useColorModeValue("gray.700", "white");
-  const { name, date, logo, price } = props;
-
+  const { name, date, logo, price, } = props;
   return (
     <Flex my="1rem" justifyContent="space-between">
       <Flex alignItems="center">
