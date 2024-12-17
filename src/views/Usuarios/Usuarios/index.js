@@ -19,7 +19,6 @@ import {
   ModalFooter,
   useDisclosure,
   useToast,
-  Input,
   FormControl,
   FormLabel,
   Select,
@@ -30,23 +29,30 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/api/usuarios';
 
-export default function usuariosTable() {
-  const [usuarios, setusuarios] = useState([]);
-  const [selectedusuarios, setSelectedusuarios] = useState(null);
-  const [editValues, setEditValues] = useState({ usuario: '', rol: '' });
+export default function UsuariosTable() {
+  const [usuarios, setUsuarios] = useState([]);
+  const [selectedUsuario, setSelectedUsuario] = useState(null);
+  const [editValues, setEditValues] = useState({ usuario: '', id_rol: '' });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
   const toast = useToast();
 
+  // Mapeo de roles
+  const rolesMap = {
+    1: 'Usuario',
+    2: 'Administrador',
+  };
+
   // Obtener usuarios de la API al montar el componente
   useEffect(() => {
-    fetchusuarios();
+    fetchUsuarios();
   }, []);
 
-  const fetchusuarios = async () => {
+  const fetchUsuarios = async () => {
     try {
       const response = await axios.get(API_URL);
-      setusuarios(response.data);
+      console.log('Usuarios cargados:', response.data);
+      setUsuarios(response.data);
     } catch (error) {
       toast({
         title: 'Error al cargar los usuarios',
@@ -58,9 +64,9 @@ export default function usuariosTable() {
     }
   };
 
-  const handleEdit = (usuarios) => {
-    setSelectedusuarios(usuarios);
-    setEditValues({ usuario: usuarios.usuario, rol: usuarios.rol });
+  const handleEdit = (usuario) => {
+    setSelectedUsuario(usuario); // Asegúrate de que contiene `usuario_id`
+    setEditValues({ usuario: usuario.usuario, id_rol: usuario.id_rol });
     onOpen();
   };
 
@@ -70,15 +76,26 @@ export default function usuariosTable() {
   };
 
   const saveChanges = async () => {
-    try {
-      await axios.put(`${API_URL}/${selectedusuarios.id}`, editValues);
+    if (!selectedUsuario || !selectedUsuario.usuario_id) {
       toast({
-        title: `Usuario ${editValues.usuario} actualizado`,
+        title: 'Error',
+        description: 'El ID del usuario no está disponible.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    try {
+      await axios.put(`${API_URL}/${selectedUsuario.usuario_id}`, editValues);
+      toast({
+        title: `Usuario actualizado`,
         status: 'success',
         duration: 3000,
         isClosable: true,
       });
-      fetchusuarios(); // Actualizar lista después de la edición
+      fetchUsuarios();
       onClose();
     } catch (error) {
       toast({
@@ -91,21 +108,34 @@ export default function usuariosTable() {
     }
   };
 
-  const handleDelete = (usuarios) => {
-    setSelectedusuarios(usuarios);
+  const handleDelete = (usuario) => {
+    console.log('Usuario seleccionado para eliminar:', usuario);
+    setSelectedUsuario(usuario);
     onDeleteOpen();
   };
 
   const confirmDelete = async () => {
-    try {
-      await axios.delete(`${API_URL}/${selectedusuarios.id}`);
+    if (!selectedUsuario || !selectedUsuario.usuario_id) {
       toast({
-        title: `Usuario ${selectedusuarios.usuario} eliminado`,
+        title: 'Error',
+        description: 'El ID del usuario no está disponible.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+    console.log('Eliminando usuario:', selectedUsuario);
+
+    try {
+      await axios.delete(`${API_URL}/${selectedUsuario.usuario_id}`);
+      toast({
+        title: `Usuario ${selectedUsuario.usuario} eliminado`,
         status: 'success',
         duration: 3000,
         isClosable: true,
       });
-      fetchusuarios(); // Actualizar lista después de la eliminación
+      fetchUsuarios();
       onDeleteClose();
     } catch (error) {
       toast({
@@ -130,22 +160,23 @@ export default function usuariosTable() {
             </Tr>
           </Thead>
           <Tbody>
-            {usuarios.map((usuarios) => (
-              <Tr key={usuarios.id}>
-                <Td>{usuarios.mail}</Td>
-                <Td>{usuarios.rol_nombre}</Td>
+            {usuarios.map((usuario) => (
+              <Tr key={usuario.usuario_id}>
+                <Td>{usuario.mail}</Td>
+                {/* Mostrar el nombre del rol en lugar del id */}
+                <Td>{rolesMap[usuario.id_rol] || 'Desconocido'}</Td>
                 <Td>
                   <IconButton
                     icon={<EditIcon />}
                     colorScheme="blue"
                     mr={2}
-                    onClick={() => handleEdit(usuarios)}
+                    onClick={() => handleEdit(usuario)}
                     aria-label="Editar usuario"
                   />
                   <IconButton
                     icon={<DeleteIcon />}
                     colorScheme="red"
-                    onClick={() => handleDelete(usuarios)}
+                    onClick={() => handleDelete(usuario)}
                     aria-label="Eliminar usuario"
                   />
                 </Td>
@@ -161,26 +192,17 @@ export default function usuariosTable() {
             <ModalHeader>Editar Usuario</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <FormControl mb={4}>
-                <FormLabel>Usuario</FormLabel>
-                <Input
-                  type="text"
-                  name="usuario"
-                  value={editValues.usuario}
-                  onChange={handleInputChange}
-                  placeholder="Nombre del usuario"
-                />
-              </FormControl>
               <FormControl>
                 <FormLabel>Rol</FormLabel>
                 <Select
-                  name="rol"
-                  value={editValues.rol}
+                  name="id_rol"
+                  value={editValues.id_rol}
                   onChange={handleInputChange}
                   placeholder="Seleccionar rol"
                 >
-                  <option value="Usuario">Usuario</option>
-                  <option value="Administrador">Administrador</option>
+                  {/* Opciones para seleccionar el id del rol */}
+                  <option value="1">Usuario</option>
+                  <option value="2">Administrador</option>
                 </Select>
               </FormControl>
             </ModalBody>
@@ -202,7 +224,7 @@ export default function usuariosTable() {
             <ModalHeader>Confirmar Eliminación</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              ¿Estás seguro de que deseas eliminar al usuario <strong>{selectedusuarios?.usuario}</strong>?
+              ¿Estás seguro de que deseas eliminar al usuario <strong>{selectedUsuario?.mail}</strong>?
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="red" mr={3} onClick={confirmDelete}>
